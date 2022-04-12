@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.13.6/dist/full.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="../assets/style.css" />
     <title>PetHub</title>
 </head>
 
@@ -14,7 +14,7 @@
     <header>
         <div class="navbar bg-base-100">
             <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl">PetHub</a>
+                <a class="btn btn-ghost normal-case text-xl" href="../index.html"><img id="petHubLogo" src="../assets/PetHubLogo.png"/></a>
             </div>
             <div class="flex-none">
                 <ul class="menu menu-horizontal p-0">
@@ -26,6 +26,54 @@
             </div>
         </div>
     </header>
+
+    <!-- jumbotron with button and content -->
+
+    <div class="hero min-h-screen" style="background-image: url(../assets/petFinderJumbotron.jpg);">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-neutral-content">
+          <div class="max-w-md">
+            <h1 class="mb-5 text-5xl font-bold">Rescue a Soul</h1>
+            <p class="mb-5">Thousands of pets are looking for a home right now. Are you ready to give them a new forever home?</p>
+            <button class="btn btn-primary" onClick="document.getElementById('formControl').scrollIntoView();">Get Started</button>
+          </div>
+        </div>
+      </div>
+
+
+    <section class="p-8 mx-4" style="display:flex;justify-content:space-evenly;flex-wrap: wrap;">
+
+        <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text mx-2">Dogs</span> 
+              <input type="checkbox" checked="checked" class="checkbox checkbox-primary">
+            </label>
+          </div>
+
+        <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text mx-2">Cats</span> 
+              <input type="checkbox" checked="checked" class="checkbox checkbox-primary">
+            </label>
+          </div>
+
+        <div class="form-control w-full max-w-xs mx-4">
+            <div class="form-control">
+                <label class="input-group">
+                  <span>Location</span>
+                  <input type="text" placeholder="Austin, TX" class="input input-bordered">
+                </label>
+              </div>
+        </div>
+
+        <button id="searchBtn" class="btn btn-primary">Search</button>
+    </section>
+
+    <section id="pets" style="display:flex;justify-content:space-evenly;flex-wrap: wrap;">
+
+    </section>
+
+    <button class="btn btn-primary">NEXT PAGE</button>
 
     <footer class="footer p-10 bg-neutral text-neutral-content">
         <div>
@@ -45,7 +93,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="assets/style.css"></script>
+    <script src="../assets/petFinder.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
-var petFinderKey = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJzaXd5d2NIOHNtVnVZa1F3YVR4TGFVN281dWtYN3NrMkRKTkM4Vm15elFFcUVlQUJxOCIsImp0aSI6IjQ1MmRlMDFlYTEzMmVhYzBkM2E3ZDBkMzk1Y2I2ZDU2MjdkZTA3NDM5YzM3ODQyOWI3OGMwNDU1NDZhMWVmN2JlZjViYWQ1ZTM0NDZkMTA4IiwiaWF0IjoxNjQ5NzE4OTk0LCJuYmYiOjE2NDk3MTg5OTQsImV4cCI6MTY0OTcyMjU5NCwic3ViIjoiIiwic2NvcGVzIjpbXX0.pRT2q7ZpZ_8Rp_EjnisT4hOTWpQRryK4j-bWgFD7pQQZVx6mX0-wRWzO4W_hXhZEv6bUB6gTG2OJkZJUY-9ln6QmrRROZmqXHC98lsWqZ07cOJTtg1iZci4efbozRPpLttsNEdwP88zxBRlCwNSpFHfF-_c6RQjwgujV1URrzJooBIl36ZTbjLpY2v-7bBP_n_093iVEfImMyw7RdoD1JNP5AccSY2zILAfOeFSb_vAaM1ljqcBAbkeVZYdSi5kqz42MylbY9RxzsrQuSi36cNSBHZkxWg4WHWabsyjMHxSkaEN3Ljpi_KqQXf0rjtdJQs0xDKPbEoiXyMyiYkZHDQ';
+var searchBtn = $("#searchBtn");
+var petsSectionEl = $("#pets");
 
 // fetch("https://api.petfinder.com/v2/animals", {
 //     method: 'GET',
@@ -12,3 +13,34 @@ var petFinderKey = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJzaXd5d2NIOHN
 // .then(function (data) {
 //   console.log(data);
 // });
+
+searchBtn.on("click", displayPetCards());
+
+function displayPetCards() {
+
+    for (var i = 0; i < 9; i++) {
+        var tempCardEl = $("<div class='card w-96 bg-base-100 shadow-xl m-3'>");
+        petsSectionEl.append(tempCardEl);
+
+        var tempCardImg = $("<figure><img src='https://api.lorem.space/image/shoes?w=400&h=225' alt='Shoes' /></figure>");
+        tempCardEl.append(tempCardImg);
+
+        var tempCardBody = $("<div class='card-body bg-secondary'>");
+        tempCardEl.append(tempCardBody);
+
+        var tempCardHeader2 = $("<h2 class='card-title'>");
+        tempCardHeader2.text("Animal Name");
+        tempCardBody.append(tempCardHeader2);
+
+        var tempCardDescription = $("<p>");
+        tempCardDescription.text("If a dog chews shoes whose shoes does he choose?");
+        tempCardBody.append(tempCardDescription);
+
+        var tempCardAction = $("<div class='card-actions justify-end'>");
+        tempCardBody.append(tempCardAction);
+
+        var tempCardBtn = $("<button class='btn btn-primary'>View</button>");
+        tempCardAction.append(tempCardBtn);
+    }
+
+}

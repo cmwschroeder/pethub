@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.13.6/dist/full.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="./assets/style.css" />
+    <link href="../assets/style.css" rel="stylesheet" type="text/css" />
     <title>PetHub</title>
 </head>
 
@@ -14,18 +14,42 @@
     <header>
         <div class="navbar bg-base-100">
             <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl">PetHub</a>
+                <a href="../index.html" class="btn btn-ghost normal-case text-xl"><img id="petHubLogo" src="../assets/PetHubLogo.png"></a>
             </div>
             <div class="flex-none">
                 <ul class="menu menu-horizontal p-0">
-                    <li><a href="">Feature 1</a></li>
-                    <li><a href="">Feature 2</a></li>
-                    <li><a href="">Feature 3</a></li>
-                    <li><a href="">Feature 4</a></li>
+                    <li><a href="../pages/petFinder.html">Pet Finder</a></li>
+                    <li><a href="../pages/animalFacts.html">Animal Facts</a></li>
+                    <li><a href="../pages/dogBreeds.html">Dog Breeds</a></li>
+                    <li><a href="../pages/charity.html">Charities</a></li>
                 </ul>
             </div>
         </div>
     </header>
+
+    <div class="grid grid-cols-5 gap-0">
+        <div class="min-h-screen bg-base-200">
+            <h2 class="text-3xl text-primary">Charity Search: </h2><br />
+            <p class="text-lg text-primary">Fill in any of the inputs, leave blank for all animal charities</p><br />
+            <div class="form-control w-full max-w-xs">
+                <label class="label">
+                  <span class="label-text">Country: </span>
+                </label>
+                <input type="text" placeholder="Country" class="input input-bordered w-full max-w-xs" id="country-input">
+                <label class="label">
+                    <span class="label-text">State: </span>
+                </label>
+                <input type="text" placeholder="State" class="input input-bordered w-full max-w-xs" id="state-input">
+                <label class="label">
+                    <span class="label-text">Zipcode: </span>
+                </label>
+                <input type="text" placeholder="Zip" class="input input-bordered w-full max-w-xs" id="zipcode-input">
+              </div>
+        </div>
+
+        <div class="col-span-4 min-h-screen bg-base-300" id="charities-div">
+        </div>
+    </div>
 
     <footer class="footer p-10 bg-neutral text-neutral-content">
         <div>
@@ -45,7 +69,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="assets/style.css"></script>
+    <script src="../assets/charity.js"></script>
 </body>
 
 </html>

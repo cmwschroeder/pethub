@@ -19,6 +19,12 @@ function getResults() {
     var state = stateEl.val();
     var zip = zipEl.val();
 
+    // reset vals in input and remove current cards from page
+    cityEl.val("");
+    stateEl.val("");
+    zipEl.val("");
+    charitySectEl.html("");
+
     //used for requesting from api
     var apiKey = "936fdb7979c2cbede08758d1d96e0f9b";
     var apiId = "6f67cffa";
@@ -59,14 +65,12 @@ function getResults() {
         //open up a modal that will tell the user that no results were found
         searchErrorText.text("No results were found for your search");
         noResultsEl.addClass("modal-open");
-        console.log(response);
         return "";
       }
       else if(response.status == 400) {
         //open up a modal that will tell the user that the inputs weren't in the correct form
         searchErrorText.text("Search was not accepted as the search inputs were not valid");
         noResultsEl.addClass("modal-open");
-        console.log(response);
         return "";
       }
       return response.json();
@@ -75,9 +79,62 @@ function getResults() {
         //don't try to access data that doesn't exist
         if(data == "") {
           return;
+        }if(data.length != 0) {
+            console.log(data);
+            //loop through the results and make a card for each result
+            //*TODO* Probably only show like 10 results at a time so we don't have 100 loaded on the page
+            //and add buttons to go to the next 10
+            for(var i = 0; i < data.length; i++) {
+                //create a div to hold the entire card
+                var cardEl = $('<div>');
+                cardEl.addClass("card w-5/6 bg-base-100 shadow-xl mx-auto my-3");
+                //create a div that will be styled as the card body
+                var cardBodyEl = $('<div>');
+                cardBodyEl.addClass("card-body");
+                //create the content of the card, header and all paragraph information
+                var header = $('<h4>');
+                header.addClass("card-title");
+                header.text(data[i].organization.charityName);
+                var cardTaglineEl = $('<p>');
+                cardTaglineEl.text(data[i].tagLine);
+                var cardMailingEl = $('<p>');
+                cardMailingEl.text("Mailing address: " + data[i].mailingAddress.streetAddress1 + ", " + data[i].mailingAddress.city + 
+                ", " + data[i].mailingAddress.stateOrProvince + ", " + data[i].mailingAddress.postalCode);
+                var textRatingEl = $('<p>');
+                textRatingEl.text("Current Charity Navigator rating: ");
+                //create an image to hold the rating stars image
+                var ratingImgEl = $('<img>');
+                ratingImgEl.attr("src", data[i].currentRating.ratingImage.large);
+                //set these so the image doesn't become super huge and stays at normal dimensions
+                ratingImgEl.addClass("w-max h-max");
+                //create a div for the button so we can keep the button to the bottom left of the card
+                var btnDiv = $('<div>');
+                btnDiv.addClass("card-actions justify-end");
+                //create a readmore button that should open up a modal with the charities messaage and a link to the charities webpage
+                var readMoreBtn = $('<button>')
+                readMoreBtn.addClass("btn btn-secondary readMoreBtn");
+                readMoreBtn.attr("data-state", i);
+                readMoreBtn.text("Read More");
+
+                //append all of the elements together and then append them to the page
+                btnDiv.append(readMoreBtn);
+                cardBodyEl.append(header);
+                cardBodyEl.append(cardTaglineEl);
+                cardBodyEl.append(cardMailingEl);
+                cardBodyEl.append(textRatingEl);
+                cardBodyEl.append(ratingImgEl);
+                cardBodyEl.append(btnDiv);
+                cardEl.append(cardBodyEl);
+                charitySectEl.append(cardEl);
+            }
         }
-        console.log(data);
     });
+}
+
+/*
+ * *TODO* This function will open up a modal that will show more info on the charity
+ */
+function readMore(event) {
 
 }
 

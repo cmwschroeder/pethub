@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" data-theme="synthwave">
+<html lang="en-us" data-theme="light">
 
 <head>
     <meta charset="UTF-8" />
@@ -27,29 +27,30 @@
         </div>
     </header>
 
-    <div class="grid grid-cols-5 gap-0">
-        <div class="min-h-screen bg-base-200">
+    <main class="grid grid-cols-5 gap-0">
+        <section class="min-h-screen bg-base-200 pl-3">
             <h2 class="text-3xl text-primary">Charity Search: </h2><br />
             <p class="text-lg text-primary">Fill in any of the inputs, leave blank for all animal charities</p><br />
             <div class="form-control w-full max-w-xs">
                 <label class="label">
-                  <span class="label-text">Country: </span>
-                </label>
-                <input type="text" placeholder="Country" class="input input-bordered w-full max-w-xs" id="country-input">
-                <label class="label">
-                    <span class="label-text">State: </span>
+                  <span class="label-text">State: </span>
                 </label>
                 <input type="text" placeholder="State" class="input input-bordered w-full max-w-xs" id="state-input">
+                <label class="label">
+                    <span class="label-text">City: </span>
+                </label>
+                <input type="text" placeholder="City" class="input input-bordered w-full max-w-xs" id="city-input">
                 <label class="label">
                     <span class="label-text">Zipcode: </span>
                 </label>
                 <input type="text" placeholder="Zip" class="input input-bordered w-full max-w-xs" id="zipcode-input">
-              </div>
-        </div>
+                <button class="btn btn-secondary w-full max-w-xs my-3" id="submit-button">Search</button>
+            </div>
+        </section>
 
-        <div class="col-span-4 min-h-screen bg-base-300" id="charities-div">
-        </div>
-    </div>
+        <section class="col-span-4 min-h-screen bg-base-300" id="charities-section">
+        </section>
+    </main>
 
     <footer class="footer p-10 bg-neutral text-neutral-content">
         <div>

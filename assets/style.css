@@ -1,5 +1,11 @@
+
+
 #petHubLogo {
     height: 46px;
+}
+
+#fact-cards {
+    width: 50%;
 }
 
 /* change hover for mouse over links */

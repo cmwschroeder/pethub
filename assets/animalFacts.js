@@ -14,4 +14,4 @@
         //pros hard coding- can select which picture goes with which fact so it will go together better inflow
         //cons- having a bunch of pictures generated for a bunch of facts
 
-//
+//going to generate certain APIs- some are not as useful, willuse a select few of some for dogs, and cats

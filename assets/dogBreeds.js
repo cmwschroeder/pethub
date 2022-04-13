@@ -1,11 +1,12 @@
 var apiKey = 'bc9bace5-c0cb-4315-a1ab-d705a4000250'
-var url = 'https://api.thedogapi.com/v1/breeds?api_key=bc9bace5-c0cb-4315-a1ab-d705a4000250'
+var urlDog = 'https://api.thedogapi.com/v1/breeds?api_key=bc9bace5-c0cb-4315-a1ab-d705a4000250'
 var select = $('#dog')
-var img = 'https://api.TheDogAPI.com/images/search?breed_id={{selected_breed.id}} '
-
+    // var img = 'https://api.thedogapi.com/v1/images/search'
+var breed = $("#breed")
+var dogData = []
 
 function populateList() {
-    fetch(url)
+    fetch(urlDog)
         .then(function(response) {
             return response.json();
         })
@@ -16,6 +17,27 @@ function populateList() {
                 optionEl.text(data[i].name)
                 select.append(optionEl)
             }
+            dogData = data
+                // listSelect(data)
         })
 }
 populateList()
+
+select.change(listSelect)
+
+function listSelect() {
+    // var dogBreeds = {
+    //     name: data[i].name,
+    //     bred_for: data[i].bred_for,
+    //     breed_group: data[i].breed_group,
+    //     height: data[i].height.imperial,
+    //     life_span: data[i].life_span,
+    //     temperament: data[i].temperament,
+    //     origin: data[i].origin,
+    //     image: data[i].image.url
+    // }
+    // var imageEl = $('<img>')
+    // imageEl.attr('src', dogBreeds.image)
+    // breed.append(imageEl)
+    console.log("hello is it me youre looking for")
+}

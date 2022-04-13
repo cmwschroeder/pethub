@@ -37,6 +37,7 @@ var animalImages = [
 ///link all picture refs
 "../assets/kittens.jpg"
 
+
 ]
 
 
@@ -44,15 +45,18 @@ var animalImages = [
 
 function displayFacts() {
 
+    // generates every carousel slide(30)
     for(i = 0; i < animalFacts.length; i++) {
-
+        //creating the carousel slide containers with unique ID at index "i"
+    
         var carouselBody = $(" <div id='slide" + i + "'class='carousel-item relative w-full bg-secondary rounded'>");
         var carouselBtnDiv = $('<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">');
         var buttonLeft = $('<a class="btn btn-circle">');
         var buttonRight = $('<a class="btn btn-circle">');
         var petImage = $("<img class='h-96 rounded'>");
         var factTitle = $("<h3>");
-
+        
+        //when the button right or left is setting conditions for where the carousel is currently at-beginning, end, middle
         if(i === 0) {
             buttonLeft.attr("href", "#slide" + (animalFacts.length -1)); 
             buttonRight.attr("href", "#slide1")
@@ -70,7 +74,7 @@ function displayFacts() {
         buttonRight.text("❯");
         buttonLeft.text("❮")
 
-        
+        ///adding the container to the webpage
         carouselContainer.append(carouselBody);
         carouselBody.append(carouselBtnDiv);
         carouselBody.append(petImage, factTitle)
@@ -79,9 +83,3 @@ function displayFacts() {
 }
     
 displayFacts();
-
-//decide between hard coding and  api generate pictures for animal pictures
-        //pros hard coding- can select which picture goes with which fact so it will go together better inflow
-        //cons- having a bunch of pictures generated for a bunch of facts
-
-//going to generate certain APIs- some are not as useful, willuse a select few of some for dogs, and cats

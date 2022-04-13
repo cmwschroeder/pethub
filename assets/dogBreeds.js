@@ -47,7 +47,12 @@ function listSelect() {
     }
     var imageEl = $('<img>')
     imageEl.attr('src', dogBreeds.image)
+    imageEl.attr('style', "h-100")
     breed.append(imageEl)
     console.log("hello is it me youre looking for")
+    var nameEl = $('<h1>')
+    nameEl.text(dogBreeds.name)
+    nameEl.attr("style", "font-size:60px")
+    breed.append(nameEl)
 
 }

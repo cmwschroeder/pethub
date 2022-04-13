@@ -17,6 +17,10 @@ searchBtn.on("click", pullPetFinderData);
 
 function displayPetCards() {
     console.log(petsArray);
+
+    searchBtn.attr("class", "btn btn-primary");
+    searchBtn.text("Search");
+
     for (var i = 0; i < 9; i++) {
         var tempCardEl = $("<div class='card w-96 bg-base-100 shadow-xl m-3'>");
         petsSectionEl.append(tempCardEl);
@@ -85,6 +89,8 @@ function pullPetFinderAuth() {
 function pullPetFinderData() {
     console.log(petTypeSelect.children("option:selected").val());
 
+    searchBtn.attr("class", "btn loading");
+    searchBtn.text("loading");
 
     //create a variable here for the url and query selectors
     //connect this to the search form by creating an if

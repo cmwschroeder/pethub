@@ -24,8 +24,12 @@ function displayPetCards() {
         if (petsArray[i].photo === undefined) {
             if(petsArray[i].type === "Dog") {
                 petsArray[i].photo = "../assets/nophotoDog.png";
-            } else {
+            } else if (petsArray[i].type === "Cat") {
                 petsArray[i].photo = "../assets/nophotoCat.png";
+            } else if (petsArray[i].type === "Bird") {
+                petsArray[i].photo = "../assets/nophotoBird.png";
+            } else {
+                petsArray[i].photo = "../assets/nophotoRabbit.png";
             }
         }
 
@@ -114,8 +118,7 @@ function setPetData(data) {
             state: data.animals[i].contact.address.state,
             type: data.animals[i].type,
             url: data.animals[i].url,
-            photo: '../assets/nophotoDog.png',
-            tags: data.animals[i].tags
+            photo: '../assets/nophotoDog.png'
         } 
 
         if (data.animals[i].primary_photo_cropped !== null && data.animals[i].primary_photo_cropped !== [] && data.animals[i].primary_photo_cropped !== undefined) {
@@ -126,19 +129,6 @@ function setPetData(data) {
             petObj.photo = "../assets/nophotoDog.png";
         }
 
-        if(petObj.description === null) {
-            petObj.description = "No description.";
-            if(petObj.tags !== null) {
-                petObj.description = "";
-                for (var j = 0; j < petObj.tags.length; j++) {
-                    if (j !== petObj.tags.length - 1) {
-                        petObj.description.concat(tags[j] + ", ");
-                    } else {
-                        petObj.description.concat(tags[j]);
-                    }
-                }
-            }
-        }
         petsArray.push(petObj);
     }
     setTimeout(displayPetCards, 2000);

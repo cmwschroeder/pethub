@@ -29,7 +29,7 @@ function displayPetCards() {
             }
         }
 
-        var tempCardImg = $("<figure><img class='h-96' src='" + petsArray[i].photo + "' alt='" + petsArray[i].name + "' /></figure>");
+        var tempCardImg = $("<figure class='bg-cover h-96' style='background-image: url(\"" + petsArray[i].photo + "\");'</figure>");
         tempCardEl.append(tempCardImg);
 
         var tempCardBody = $("<div class='card-body bg-secondary'>");

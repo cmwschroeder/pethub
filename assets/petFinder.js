@@ -1,5 +1,6 @@
 var searchBtn = $("#searchBtn");
 var petsSectionEl = $("#pets");
+var petTypeSelect = $("#petType");
 
 var petFinderUrl = "https://api.petfinder.com/v2/animals";
 var apiKey = "siwywcH8smVuYkQwaTxLaU7o5ukX7sk2DJNC8VmyzQEqEeABq8";
@@ -12,9 +13,7 @@ var animalCount = 20;
 
 pullPetFinderAuth();
 
-
-
-// searchBtn.on("click", displayPetCards());
+searchBtn.on("click", pullPetFinderData);
 
 function displayPetCards() {
     console.log(petsArray);
@@ -41,7 +40,7 @@ function displayPetCards() {
         tempCardBody.append(tempCardHeader2);
 
         var tempCardDescription = $("<p>");
-        tempCardDescription.html(petsArray[i].description);
+        tempCardDescription.text(petsArray[i].description);
         tempCardBody.append(tempCardDescription);
 
         var tempCardLocation = $("<p>");
@@ -75,11 +74,18 @@ function pullPetFinderAuth() {
     .then(function (data) {
        apiAuthBearer = data.access_token;
     console.log(data);
-    pullPetFinderDataGeneric();
+    pullPetFinderData();
     });
 }
 
-function pullPetFinderDataGeneric() {
+function pullPetFinderData() {
+    console.log(petTypeSelect.children("option:selected").val());
+
+    //create a variable here for the url and query selectors
+    //connect this to the search form by creating an if
+    //statement which checks which selections were made
+    //and update the URL accordingly
+
     fetch("https://api.petfinder.com/v2/animals", {
         method: 'GET',
         headers: new Headers({
@@ -92,7 +98,6 @@ function pullPetFinderDataGeneric() {
     .then(function (data) {
         setTimeout(setPetData(data), 1000);
     console.log(data);
-    setTimeout(displayPetCards, 2000);
     });
 
 }
@@ -136,5 +141,5 @@ function setPetData(data) {
         }
         petsArray.push(petObj);
     }
-
+    setTimeout(displayPetCards, 2000);
 }

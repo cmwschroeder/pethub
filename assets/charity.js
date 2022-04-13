@@ -139,6 +139,7 @@ function getResults() {
                 cardEl.append(cardBodyEl);
                 charitySectEl.append(cardEl);
             }
+            ScrollReveal().reveal('.card', {delay: 500});
         }
     });
 }

@@ -4,6 +4,7 @@ var stateEl = $("#state-input");
 var zipEl = $("#zipcode-input");
 // Reference to button for event listener
 var subButEl = $("#submit-button");
+var eggButEl = $("#egg-button");
 
 // References for modals
 var noResultsEl = $('#404-modal');
@@ -21,7 +22,15 @@ var charitySectEl = $("#charities-section");
 
 var gottenData = [];
 
+//array of state abbreviations for filling so we don't clutter up html
+var states = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA',
+             'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
+             'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+
 function getResults() {
+    //make the submit button into a loading symbol
+    subButEl.addClass("loading btn-disabled");
+    subButEl.text("Loading")
     //user inputs from page
     var city = cityEl.val();
     var state = stateEl.val();
@@ -29,7 +38,7 @@ function getResults() {
 
     // reset vals in input and remove current cards from page
     cityEl.val("");
-    stateEl.val("");
+    stateEl.val("State");
     zipEl.val("");
     charitySectEl.html("");
 
@@ -68,6 +77,9 @@ function getResults() {
     //fetch results from gathered user input
     fetch(requestUrl)
     .then(function (response) {
+      //remove loading animation from button
+      subButEl.removeClass("loading btn-disabled");
+      subButEl.text("Submit");
       //check if we get 404 back from the api request and tell user
       if (response.status === 404) {
         //open up a modal that will tell the user that no results were found
@@ -87,16 +99,21 @@ function getResults() {
         //don't try to access data that doesn't exist
         if(data == "") {
           return;
-        }if(data.length != 0) {
+        }
+        //Only show 20 results per page
+        var resultNum;
+        if(data.length > 20) {
+            resultNum = 20;
+        } else {
+            resultNum = data.length;
+        }
+        if(resultNum != 0) {
             gottenData = [];
             for(var i = 0; i < data.length; i++) {
                 gottenData[i] = data[i];
             }
-            console.log(data);
             //loop through the results and make a card for each result
-            //*TODO* Probably only show like 10 results at a time so we don't have 100 loaded on the page
-            //and add buttons to go to the next 10
-            for(var i = 0; i < data.length; i++) {
+            for(var i = 0; i < resultNum; i++) {
                 //create a div to hold the entire card
                 var cardEl = $('<div>');
                 cardEl.addClass("card w-5/6 bg-base-100 shadow-xl mx-auto my-3");
@@ -139,6 +156,16 @@ function getResults() {
                 cardEl.append(cardBodyEl);
                 charitySectEl.append(cardEl);
             }
+            if(data.length > 50) {
+                var cycleBtnDiv = $('<div class="grid grid-cols-5 gap-0 m-3">');
+                var prevBtn = $('<button class="btn btn-primary w-full hidden">');
+                prevBtn.text("Previous")
+                var nextBtn = $('<button class="btn btn-secondary w-full col-start-5">');
+                nextBtn.text("Next");
+                cycleBtnDiv.append(prevBtn);
+                cycleBtnDiv.append(nextBtn);
+                charitySectEl.append(cycleBtnDiv);
+            }
             ScrollReveal().reveal('.card');
         }
     });
@@ -158,6 +185,19 @@ function readMore(event) {
     charityModal.addClass("modal-open");
 }
 
+/*
+ * This function will fill the state select with options for each state abbreviation
+ */
+function fillStates() {
+    //Loop through the states array and add an option in the select tag for each state abbreviation
+    //Since the states have to be inputted in the abbreviated form for API request
+    for(var i = 0; i < states.length; i++) {
+        var option = $('<option>');
+        option.text(states[i]);
+        stateEl.append(option);
+    }
+}
+
 //For when the user clicks on the button to search for charities
 subButEl.on("click", getResults);
 //For when the modal opens telling the user that there was an error searching for results
@@ -170,3 +210,16 @@ closeCharityModal.on("click", function() {
 });
 //Clicking on any read more button will open up with more info on the charity and a link to the charities website
 charitySectEl.on("click", ".readMoreBtn", readMore);
+
+eggButEl.on("click", function() {
+    var html = $('html');
+    if(html.attr("data-theme") === "synthwave") {
+        html.attr("data-theme", "cyberpunk");
+    } else if(html.attr("data-theme") === "cyberpunk") {
+        html.attr("data-theme", "luxury");
+    } else {
+        html.attr("data-theme", "synthwave");
+    }
+});
+
+fillStates();

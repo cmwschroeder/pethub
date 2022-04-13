@@ -10,12 +10,12 @@
     <title>PetHub</title>
 </head>
 
-<input type="checkbox" id="my-modal-3" class="modal-toggle">
-<div class="modal">
+<input type="checkbox" class="modal-toggle">
+<div id="errorModal" class="modal">
   <div class="modal-box relative">
-    <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+    <label for="errorModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
     <h3 class="text-lg font-bold">No results found</h3>
-    <p class="py-4">The location you are searching for either does not exist or has no animals for adoption nearby.</p>
+    <p id="errorText" class="py-4">This location may not have any pets for adoption. Also make sure to enter your location with a comma separating the city, state. <br><br>You may enter your zip code as an option as well.</p>
   </div>
 </div>
 
@@ -23,7 +23,7 @@
     <header>
         <div class="navbar bg-base-100">
             <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl" href="../index.html"><img id="petHubLogo" src="../assets/PetHubLogo.png"/></a>
+                <a class="btn btn-ghost normal-case text-xl" href="../index.html"><img id="petHubLogo" src="../assets/media/PetHubLogo.png"/></a>
             </div>
             <div class="flex-none">
                 <ul class="menu menu-horizontal p-0">
@@ -38,7 +38,7 @@
 
     <!-- jumbotron with button and content -->
 
-    <div class="hero min-h-screen" style="background-image: url(../assets/petFinderJumbotron.jpg);">
+    <div class="hero min-h-screen" style="background-image: url(../assets/media/petFinderJumbotron.jpg);">
         <div class="hero-overlay bg-opacity-60"></div>
         <div class="hero-content text-center text-neutral-content">
           <div class="max-w-md">

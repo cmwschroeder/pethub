@@ -2,6 +2,8 @@ var searchBtn = $("#searchBtn");
 var petsSectionEl = $("#pets");
 var petTypeSelect = $("#petType");
 var petLocationInput = $("#petLocation")
+var errorModal = $("#errorModal");
+var errorText = $("#errorText");
 
 var petFinderUrl = "https://api.petfinder.com/v2/animals";
 var apiKey = "siwywcH8smVuYkQwaTxLaU7o5ukX7sk2DJNC8VmyzQEqEeABq8";
@@ -10,7 +12,7 @@ var apiSecret = "kFtKSHvS38045Ixyzok8EtG9BdouqbfU3CMdC1iK";
 var apiAuthBearer;
 
 var petsArray = [];
-var animalCount = 20;
+var currentPage = 1;
 
 pullPetFinderAuth();
 
@@ -22,19 +24,19 @@ function displayPetCards() {
     searchBtn.attr("class", "btn btn-primary");
     searchBtn.text("Search");
 
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0; i < petsArray.length; i++) {
         var tempCardEl = $("<div class='card w-96 bg-base-100 shadow-xl m-3'>");
         petsSectionEl.append(tempCardEl);
 
         if (petsArray[i].photo === undefined) {
             if(petsArray[i].type === "Dog") {
-                petsArray[i].photo = "../assets/nophotoDog.png";
+                petsArray[i].photo = "../assets/media/nophotoDog.png";
             } else if (petsArray[i].type === "Cat") {
-                petsArray[i].photo = "../assets/nophotoCat.png";
+                petsArray[i].photo = "../assets/media/nophotoCat.png";
             } else if (petsArray[i].type === "Bird") {
-                petsArray[i].photo = "../assets/nophotoBird.png";
+                petsArray[i].photo = "../assets/media/nophotoBird.png";
             } else {
-                petsArray[i].photo = "../assets/nophotoRabbit.png";
+                petsArray[i].photo = "../assets/media/nophotoRabbit.png";
             }
         }
 
@@ -82,14 +84,11 @@ function pullPetFinderAuth() {
     })
     .then(function (data) {
        apiAuthBearer = data.access_token;
-    console.log(data);
     pullPetFinderData();
     });
 }
 
 function pullPetFinderData() {
-    console.log(petTypeSelect.children("option:selected").val());
-
     searchBtn.attr("class", "btn loading");
     searchBtn.text("loading");
 
@@ -100,16 +99,10 @@ function pullPetFinderData() {
     } else if (petTypeSelect.children("option:selected").val() !== "All" && petLocationInput.val() === "") {
         petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val(); 
     } else if (petTypeSelect.children("option:selected").val() === "All"){
-        petFinderUrl = "https://api.petfinder.com/v2/animals?location=" + petLocationInput;
+        petFinderUrl = "https://api.petfinder.com/v2/animals?location=" + petLocationInput.val();
     } else {
-        petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val() + "&location=" + petLocationInput;
+        petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val() + "&location=" + petLocationInput.val();
     }
-    
-
-    //create a variable here for the url and query selectors
-    //connect this to the search form by creating an if
-    //statement which checks which selections were made
-    //and update the URL accordingly
 
     fetch(petFinderUrl, {
         method: 'GET',
@@ -118,6 +111,19 @@ function pullPetFinderData() {
         })
     })
     .then(function (response) {
+        //check if we get 404 back from the api request and tell user
+        if (response.status === 404) {
+          //open up a modal that will tell the user that no results were found
+          errorText.text("Hmm it seems");
+          noResultsEl.addClass("modal-open");
+          return "";
+        }
+        else if(response.status == 400) {
+          //open up a modal that will tell the user that the inputs weren't in the correct form
+          searchErrorText.text("Search was not accepted as the search inputs were not valid");
+          noResultsEl.addClass("modal-open");
+          return "";
+        }
     return response.json();
     })
     .then(function (data) {
@@ -134,7 +140,7 @@ function setPetData(data) {
         petsSectionEl.children().remove();
     }
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < data.animals.length; i++) {
 
         var petObj = {
             name: data.animals[i].name,
@@ -144,7 +150,7 @@ function setPetData(data) {
             state: data.animals[i].contact.address.state,
             type: data.animals[i].type,
             url: data.animals[i].url,
-            photo: '../assets/nophotoDog.png'
+            photo: '../assets/media/nophotoDog.png'
         } 
 
         if (data.animals[i].primary_photo_cropped !== null && data.animals[i].primary_photo_cropped !== [] && data.animals[i].primary_photo_cropped !== undefined) {
@@ -152,7 +158,7 @@ function setPetData(data) {
         } else if (data.animals[i].photos !== null && data.animals[i].photos !== [] &&  data.animals[i].photos !== undefined) {
             petObj.photo = data.animals[i].photos[0];
         } else {
-            petObj.photo = "../assets/nophotoDog.png";
+            petObj.photo = "../assets/media/nophotoDog.png";
         }
 
         petsArray.push(petObj);

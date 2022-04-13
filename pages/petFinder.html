@@ -10,11 +10,20 @@
     <title>PetHub</title>
 </head>
 
+<input type="checkbox" class="modal-toggle">
+<div id="errorModal" class="modal">
+  <div class="modal-box relative">
+    <label for="errorModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+    <h3 class="text-lg font-bold">No results found</h3>
+    <p id="errorText" class="py-4">This location may not have any pets for adoption. Also make sure to enter your location with a comma separating the city, state. <br><br>You may enter your zip code as an option as well.</p>
+  </div>
+</div>
+
 <body>
     <header>
         <div class="navbar bg-base-100">
             <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl" href="../index.html"><img id="petHubLogo" src="../assets/PetHubLogo.png"/></a>
+                <a class="btn btn-ghost normal-case text-xl" href="../index.html"><img id="petHubLogo" src="../assets/media/PetHubLogo.png"/></a>
             </div>
             <div class="flex-none">
                 <ul class="menu menu-horizontal p-0">
@@ -29,7 +38,7 @@
 
     <!-- jumbotron with button and content -->
 
-    <div class="hero min-h-screen" style="background-image: url(../assets/petFinderJumbotron.jpg);">
+    <div class="hero min-h-screen" style="background-image: url(../assets/media/petFinderJumbotron.jpg);">
         <div class="hero-overlay bg-opacity-60"></div>
         <div class="hero-content text-center text-neutral-content">
           <div class="max-w-md">
@@ -55,7 +64,7 @@
           <div class="form-control">
               <label class="input-group">
                 <span>Location</span>
-                <input type="text" placeholder="Austin, TX" class="input input-bordered">
+                <input id="petLocation" type="text" placeholder="Austin, TX" class="input input-bordered">
               </label>
             </div>
       </div>

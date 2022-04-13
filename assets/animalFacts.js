@@ -35,6 +35,8 @@ var animalFacts = [
 
 var animalImages = [
 ///link all picture refs
+"../assets/kittens.jpg"
+
 ]
 
 
@@ -42,25 +44,38 @@ var animalImages = [
 
 function displayFacts() {
 
-    // for(i = 0; i < animalFacts.length; i++) {    
-    // }
-        //var cardContainer = $("<div class='card card-side bg-secondary shadow-xl m-3'>");
-        var carouselBody = $(" <div id='slide1' class='carousel-item relative w-full'>");
-        var carouselBtnDiv = $('<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">');
-        var buttonLeft = $('<a href="#slide4" class="btn btn-circle">');
-        var buttonRight = $(' <a href="#slide2" class="btn btn-circle">');
-        var petImage = $("<img>");
-        //var numberHeader = $("<h2 class='card-title'>");
-        var factTitle = $("<h3>");
-        // var factDescript = $("<p>");
+    for(i = 0; i < animalFacts.length; i++) {
 
-        petImage.attr("src", "https://unsplash.com/photos/U3aF7hgUSrk");
-        factTitle.text(animalFacts[1]);
+        var carouselBody = $(" <div id='slide" + i + "'class='carousel-item relative w-full bg-secondary rounded'>");
+        var carouselBtnDiv = $('<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">');
+        var buttonLeft = $('<a class="btn btn-circle">');
+        var buttonRight = $('<a class="btn btn-circle">');
+        var petImage = $("<img class='h-96 rounded'>");
+        var factTitle = $("<h3>");
+
+        if(i === 0) {
+            buttonLeft.attr("href", "#slide" + (animalFacts.length -1)); 
+            buttonRight.attr("href", "#slide1")
+        } else if (i === animalFacts.length -1) {
+            buttonLeft.attr("href", "#slide" + (i - 1));
+            buttonRight.attr("href", "#slide0");
+        } else {
+            buttonLeft.attr("href", "#slide" + (i - 1));
+            buttonRight.attr("href", "#slide" +(i + 1))
+        }
+        
+        
+        petImage.attr("src", animalImages[0]);
+        factTitle.text(animalFacts[i]);
+        buttonRight.text("❯");
+        buttonLeft.text("❮")
+
         
         carouselContainer.append(carouselBody);
         carouselBody.append(carouselBtnDiv);
         carouselBody.append(petImage, factTitle)
         carouselBtnDiv.append(buttonLeft, buttonRight);
+    }
 }
     
 displayFacts();

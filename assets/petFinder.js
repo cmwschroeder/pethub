@@ -43,15 +43,15 @@ function displayPetCards() {
         tempCardHeader2.text(petsArray[i].name);
         tempCardBody.append(tempCardHeader2);
 
-        var tempCardDescription = $("<p>");
+        var tempCardDescription = $("<p class='primary-content'>");
         tempCardDescription.text(petsArray[i].description);
         tempCardBody.append(tempCardDescription);
 
-        var tempCardLocation = $("<p>");
+        var tempCardLocation = $("<p class='primary-content'>");
         tempCardLocation.text("Location: " + petsArray[i].city + ", " + petsArray[i].state);
         tempCardBody.append(tempCardLocation);
 
-        var tempCardType = $("<p>");
+        var tempCardType = $("<p class='primary-content'>");
         tempCardType.text("Type: " + petsArray[i].type);
         tempCardBody.append(tempCardType);
 
@@ -85,6 +85,7 @@ function pullPetFinderAuth() {
 function pullPetFinderData() {
     console.log(petTypeSelect.children("option:selected").val());
 
+
     //create a variable here for the url and query selectors
     //connect this to the search form by creating an if
     //statement which checks which selections were made
@@ -107,7 +108,12 @@ function pullPetFinderData() {
 }
 
 function setPetData(data) {
-            
+    
+    if (petsArray.length > 0) {
+        petsArray = [];
+        petsSectionEl.children().remove();
+    }
+
     for (var i = 0; i < 20; i++) {
 
         var petObj = {

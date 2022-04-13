@@ -21,7 +21,15 @@ var charitySectEl = $("#charities-section");
 
 var gottenData = [];
 
+//array of state abbreviations for filling so we don't clutter up html
+var states = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA',
+             'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
+             'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+
 function getResults() {
+    //make the submit button into a loading symbol
+    subButEl.addClass("loading btn-disabled");
+    subButEl.text("Loading")
     //user inputs from page
     var city = cityEl.val();
     var state = stateEl.val();
@@ -29,7 +37,7 @@ function getResults() {
 
     // reset vals in input and remove current cards from page
     cityEl.val("");
-    stateEl.val("");
+    stateEl.val("State");
     zipEl.val("");
     charitySectEl.html("");
 
@@ -68,6 +76,9 @@ function getResults() {
     //fetch results from gathered user input
     fetch(requestUrl)
     .then(function (response) {
+      //remove loading animation from button
+      subButEl.removeClass("loading btn-disabled");
+      subButEl.text("Submit");
       //check if we get 404 back from the api request and tell user
       if (response.status === 404) {
         //open up a modal that will tell the user that no results were found
@@ -158,6 +169,19 @@ function readMore(event) {
     charityModal.addClass("modal-open");
 }
 
+/*
+ * This function will fill the state select with options for each state abbreviation
+ */
+function fillStates() {
+    //Loop through the states array and add an option in the select tag for each state abbreviation
+    //Since the states have to be inputted in the abbreviated form for API request
+    for(var i = 0; i < states.length; i++) {
+        var option = $('<option>');
+        option.text(states[i]);
+        stateEl.append(option);
+    }
+}
+
 //For when the user clicks on the button to search for charities
 subButEl.on("click", getResults);
 //For when the modal opens telling the user that there was an error searching for results
@@ -170,3 +194,5 @@ closeCharityModal.on("click", function() {
 });
 //Clicking on any read more button will open up with more info on the charity and a link to the charities website
 charitySectEl.on("click", ".readMoreBtn", readMore);
+
+fillStates();

@@ -9,8 +9,12 @@
     justify-content: center;
     align-items: center;
 }
-#testimonial-side {
+#testimonial-left {
     border-right: 2px solid rgb(237, 214, 66);
+
+}
+
+#our-pets {
 
 }
 

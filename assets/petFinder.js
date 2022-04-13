@@ -1,6 +1,7 @@
 var searchBtn = $("#searchBtn");
 var petsSectionEl = $("#pets");
 var petTypeSelect = $("#petType");
+var petLocationInput = $("#petLocation")
 
 var petFinderUrl = "https://api.petfinder.com/v2/animals";
 var apiKey = "siwywcH8smVuYkQwaTxLaU7o5ukX7sk2DJNC8VmyzQEqEeABq8";
@@ -92,12 +93,25 @@ function pullPetFinderData() {
     searchBtn.attr("class", "btn loading");
     searchBtn.text("loading");
 
+    var petFinderUrl = "https://api.petfinder.com/v2/animals";
+
+    if (petTypeSelect.children("option:selected").val() === "All" && petLocationInput.val() === "") {
+        petFinderUrl = "https://api.petfinder.com/v2/animals";
+    } else if (petTypeSelect.children("option:selected").val() !== "All" && petLocationInput.val() === "") {
+        petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val(); 
+    } else if (petTypeSelect.children("option:selected").val() === "All"){
+        petFinderUrl = "https://api.petfinder.com/v2/animals?location=" + petLocationInput;
+    } else {
+        petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val() + "&location=" + petLocationInput;
+    }
+    
+
     //create a variable here for the url and query selectors
     //connect this to the search form by creating an if
     //statement which checks which selections were made
     //and update the URL accordingly
 
-    fetch("https://api.petfinder.com/v2/animals", {
+    fetch(petFinderUrl, {
         method: 'GET',
         headers: new Headers({
             'Authorization': 'Bearer ' +  apiAuthBearer

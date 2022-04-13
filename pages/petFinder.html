@@ -18,9 +18,9 @@
             </div>
             <div class="flex-none">
                 <ul class="menu menu-horizontal p-0">
-                    <li><a href="">Feature 1</a></li>
-                    <li><a href="">Feature 2</a></li>
-                    <li><a href="">Feature 3</a></li>
+                    <li><a href="dogBreeds.html">Feature 1</a></li>
+                    <li><a href="charity.html">Feature 2</a></li>
+                    <li><a href="animalFacts.html">Feature 3</a></li>
                     <li><a href="">Feature 4</a></li>
                 </ul>
             </div>
@@ -43,30 +43,24 @@
 
     <section class="p-8 mx-4" style="display:flex;justify-content:space-evenly;flex-wrap: wrap;">
 
-        <div class="form-control">
-            <label class="label cursor-pointer">
-              <span class="label-text mx-2">Dogs</span> 
-              <input type="checkbox" checked="checked" class="checkbox checkbox-primary">
-            </label>
-          </div>
+      <select id="petType" class="select select-bordered w-full max-w-xs">
+        <option value="All">All Animals</option>
+        <option value="dog">Dogs</option>
+        <option value="cat">Cats</option>
+        <option value="bird">Birds</option>
+        <option value="rabbit">Rabbits</option>
+      </select>
 
-        <div class="form-control">
-            <label class="label cursor-pointer">
-              <span class="label-text mx-2">Cats</span> 
-              <input type="checkbox" checked="checked" class="checkbox checkbox-primary">
-            </label>
-          </div>
+      <div class="form-control w-full max-w-xs mx-4">
+          <div class="form-control">
+              <label class="input-group">
+                <span>Location</span>
+                <input type="text" placeholder="Austin, TX" class="input input-bordered">
+              </label>
+            </div>
+      </div>
 
-        <div class="form-control w-full max-w-xs mx-4">
-            <div class="form-control">
-                <label class="input-group">
-                  <span>Location</span>
-                  <input type="text" placeholder="Austin, TX" class="input input-bordered">
-                </label>
-              </div>
-        </div>
-
-        <button id="searchBtn" class="btn btn-primary">Search</button>
+      <button id="searchBtn" class="btn btn-primary">Search</button>
     </section>
 
     <section id="pets" style="display:flex;justify-content:space-evenly;flex-wrap: wrap;">

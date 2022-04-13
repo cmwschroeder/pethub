@@ -98,16 +98,21 @@ function getResults() {
         //don't try to access data that doesn't exist
         if(data == "") {
           return;
-        }if(data.length != 0) {
+        }
+        //Only show 20 results per page
+        var resultNum;
+        if(data.length > 20) {
+            resultNum = 20;
+        } else {
+            resultNum = data.length;
+        }
+        if(resultNum != 0) {
             gottenData = [];
             for(var i = 0; i < data.length; i++) {
                 gottenData[i] = data[i];
             }
-            console.log(data);
             //loop through the results and make a card for each result
-            //*TODO* Probably only show like 10 results at a time so we don't have 100 loaded on the page
-            //and add buttons to go to the next 10
-            for(var i = 0; i < data.length; i++) {
+            for(var i = 0; i < resultNum; i++) {
                 //create a div to hold the entire card
                 var cardEl = $('<div>');
                 cardEl.addClass("card w-5/6 bg-base-100 shadow-xl mx-auto my-3");
@@ -149,6 +154,16 @@ function getResults() {
                 cardBodyEl.append(btnDiv);
                 cardEl.append(cardBodyEl);
                 charitySectEl.append(cardEl);
+            }
+            if(data.length > 50) {
+                var cycleBtnDiv = $('<div class="grid grid-cols-5 gap-0 m-3">');
+                var prevBtn = $('<button class="btn btn-primary w-full hidden">');
+                prevBtn.text("Previous")
+                var nextBtn = $('<button class="btn btn-secondary w-full col-start-5">');
+                nextBtn.text("Next");
+                cycleBtnDiv.append(prevBtn);
+                cycleBtnDiv.append(nextBtn);
+                charitySectEl.append(cycleBtnDiv);
             }
             ScrollReveal().reveal('.card');
         }

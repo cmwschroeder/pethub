@@ -35,7 +35,7 @@ var animalFacts = [
 
 var animalImages = [
 ///link all picture refs
-"../assets/kittens.jpg"
+"../assets/media/kittens.jpg"
 
 
 ]
@@ -54,7 +54,7 @@ function displayFacts() {
         var buttonLeft = $('<a class="btn btn-circle">');
         var buttonRight = $('<a class="btn btn-circle">');
         var petImage = $("<img class='h-96 rounded'>");
-        var factTitle = $("<h3>");
+        var factTitle = $("<h3 m-auto>");
         
         //when the button right or left is setting conditions for where the carousel is currently at-beginning, end, middle
         if(i === 0) {

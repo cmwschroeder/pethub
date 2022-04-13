@@ -1,9 +1,18 @@
-
-
 #petHubLogo {
     height: 46px;
 }
 
+#testimonials {
+    font-size: 130%;
+    font-weight: bold; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#testimonial-side {
+    border-right: 2px solid rgb(237, 214, 66);
+
+}
 
 
 /* change hover for mouse over links */

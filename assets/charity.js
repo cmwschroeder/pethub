@@ -5,13 +5,21 @@ var zipEl = $("#zipcode-input");
 // Reference to button for event listener
 var subButEl = $("#submit-button");
 
-// References for modal
+// References for modals
 var noResultsEl = $('#404-modal');
 var closeNoResultsEl = $('#close-modal');
 var searchErrorText = $('#error-text');
 
+var charityModal = $('#charity-info-modal');
+var closeCharityModal = $('#close-charity-modal');
+var charityMessageEl = $('#charity-message');
+var charityModalHeadEl = $('#modal-header');
+var charityLinkEl = $('#charity-link');
+
 // Section to add the charity resultes to
 var charitySectEl = $("#charities-section");
+
+var gottenData = [];
 
 function getResults() {
     //user inputs from page
@@ -80,6 +88,10 @@ function getResults() {
         if(data == "") {
           return;
         }if(data.length != 0) {
+            gottenData = [];
+            for(var i = 0; i < data.length; i++) {
+                gottenData[i] = data[i];
+            }
             console.log(data);
             //loop through the results and make a card for each result
             //*TODO* Probably only show like 10 results at a time so we don't have 100 loaded on the page
@@ -113,7 +125,7 @@ function getResults() {
                 //create a readmore button that should open up a modal with the charities messaage and a link to the charities webpage
                 var readMoreBtn = $('<button>')
                 readMoreBtn.addClass("btn btn-secondary readMoreBtn");
-                readMoreBtn.attr("data-state", i);
+                readMoreBtn.attr("data-num", i);
                 readMoreBtn.text("Read More");
 
                 //append all of the elements together and then append them to the page
@@ -132,10 +144,17 @@ function getResults() {
 }
 
 /*
- * *TODO* This function will open up a modal that will show more info on the charity
+ * This function will open up a modal with info on the charity, including the charity name, the mission, and a link to the charities website
  */
 function readMore(event) {
-
+    //Get the index for the charity we want to see, button will have a index number in its data.
+    var index = $(event.currentTarget).attr("data-num");
+    //Charity name in modal
+    charityModalHeadEl.text(gottenData[index].organization.charityName);
+    //Set html and not text because the mission return in api request includes <br> for formatting
+    charityMessageEl.html(gottenData[index].mission);
+    charityLinkEl.attr("href", gottenData[index].websiteURL);
+    charityModal.addClass("modal-open");
 }
 
 //For when the user clicks on the button to search for charities
@@ -144,3 +163,9 @@ subButEl.on("click", getResults);
 closeNoResultsEl.on("click", function() {
     noResultsEl.removeClass("modal-open");
 });
+//For when the charity modal is open and we want to close it
+closeCharityModal.on("click", function() {
+    charityModal.removeClass("modal-open");
+});
+//Clicking on any read more button will open up with more info on the charity and a link to the charities website
+charitySectEl.on("click", ".readMoreBtn", readMore);

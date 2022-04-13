@@ -4,6 +4,7 @@ var stateEl = $("#state-input");
 var zipEl = $("#zipcode-input");
 // Reference to button for event listener
 var subButEl = $("#submit-button");
+var eggButEl = $("#egg-button");
 
 // References for modals
 var noResultsEl = $('#404-modal');
@@ -209,5 +210,16 @@ closeCharityModal.on("click", function() {
 });
 //Clicking on any read more button will open up with more info on the charity and a link to the charities website
 charitySectEl.on("click", ".readMoreBtn", readMore);
+
+eggButEl.on("click", function() {
+    var html = $('html');
+    if(html.attr("data-theme") === "synthwave") {
+        html.attr("data-theme", "cyberpunk");
+    } else if(html.attr("data-theme") === "cyberpunk") {
+        html.attr("data-theme", "luxury");
+    } else {
+        html.attr("data-theme", "synthwave");
+    }
+});
 
 fillStates();

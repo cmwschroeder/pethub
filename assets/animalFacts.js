@@ -22,24 +22,19 @@ var catFacts = {
 
 //will need api to fetch dog facts
 
-function dogFacts() {
-    fetch('https://dog-facts-api.herokuapp.com/api/v1/resources/dogs/all')
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-    });
-  
-
+var dogFacts = {
+    fact: " A comprehensive review of studies published between 1950 and 2019 found that dog owners had a lower risk of death.",
+    fact: "Even just petting a familiar dog lowers blood pressure, heart rate, slows breathing, and relaxes muscle tension.",
+    fact: "Dogs help us recover psychologically from a crisis.",
+    fact: "Dogs help seniors with cognitive function and social interaction",
+    fact: "A dog’s sense of smell is legendary, but did you know that his nose has as many as 300 million receptors? In comparison, a human nose has about 5 million.",
+    fact: "Researchers found that dogs have similar sleep patterns and brain activity as humans, and that small breeds tend to dream more than large ones.",
+    fact: "A Greyhound would actually beat a Cheetah in a long distance race",
+    fact: "Dogs have a sense of time. It's been proven that they know the difference between an hour and five. If conditioned to, they can predict future events, such as regular walk time.",
+    fact: "Your dog is as smart as a two-year-old! Ever wonder why children around this age seem to have a special bond with the family dog? It could be because they speak the same language, roughly 250 words, and gestures in fact.",
+    fact: "When your dog is carefully choosing the perfect place to do his business, it is because they prefer to go poop in alignment with the Earth’s magnetic field."
 }
 
-//will want to store these facts to local storage
-
-function storeFacts() {
-    localStorage.setItem
-
-}
 
 //will need to dynamically generate card-like features to append the dog facts and pictures
 

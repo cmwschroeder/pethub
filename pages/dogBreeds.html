@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.13.6/dist/full.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="../assets/style.css" />
     <title>PetHub</title>
 </head>
 
@@ -14,18 +14,42 @@
     <header>
         <div class="navbar bg-base-100">
             <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl">PetHub</a>
+                <a class="btn btn-ghost normal-case text-xl"><img id="petHubLogo" src="" href=""></a>
+            </div>
+            <div>
+                <select class="select select-warning w-full max-w-xs">
+                    <option disabled selected>Select breed</option>
+                    <option>a</option>
+                    <option>a</option>
+                    <option>a</option>
+                    <option>a</option>
+                    <option>a</option>
+                  </select>
             </div>
             <div class="flex-none">
                 <ul class="menu menu-horizontal p-0">
-                    <li><a href="">Feature 1</a></li>
-                    <li><a href="">Feature 2</a></li>
-                    <li><a href="">Feature 3</a></li>
-                    <li><a href="">Feature 4</a></li>
+                    <li><a href="../pages/petFinder.html">Pet Finder</a></li>
+                    <li><a href="../pages/animalFacts.html">Animal Facts</a></li>
+                    <li><a href="../pages/charity.html">Charities</a></li>
                 </ul>
             </div>
         </div>
     </header>
+
+
+
+    <div class="hero min-h-screen" style="background-image: url(https://api.lorem.space/image/fashion?w=1000&h=800);">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-neutral-content">
+            <div class="max-w-md">
+                <h1 class="mb-5 text-5xl font-bold"></h1>
+                <p class="mb-5"></p>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <footer class="footer p-10 bg-neutral text-neutral-content">
         <div>
@@ -45,7 +69,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="assets/style.css"></script>
+    <script src="../assets/style.css"></script>
 </body>
 
 </html>

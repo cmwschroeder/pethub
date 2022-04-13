@@ -90,49 +90,51 @@ function pullPetFinderDataGeneric() {
     return response.json();
     })
     .then(function (data) {
-        setTimeout(function() {
-            
-        for (var i = 0; i < 20; i++) {
-
-            var petObj = {
-                name: data.animals[i].name,
-                gender: data.animals[i].gender,
-                description: data.animals[i].description,
-                city: data.animals[i].contact.address.city,
-                state: data.animals[i].contact.address.state,
-                type: data.animals[i].type,
-                url: data.animals[i].url,
-                photo: '../assets/nophotoDog.png',
-                tags: data.animals[i].tags
-            } 
-
-            if (data.animals[i].primary_photo_cropped !== null && data.animals[i].primary_photo_cropped !== [] && data.animals[i].primary_photo_cropped !== undefined) {
-                petObj.photo = data.animals[i].primary_photo_cropped.medium;
-            } else if (data.animals[i].photos !== null && data.animals[i].photos !== [] &&  data.animals[i].photos !== undefined) {
-                petObj.photo = data.animals[i].photos[0];
-            } else {
-                petObj.photo = "../assets/nophotoDog.png";
-            }
-
-            if(petObj.description === null) {
-                petObj.description = "No description.";
-                if(petObj.tags !== null) {
-                    petObj.description = "";
-                    for (var j = 0; j < petObj.tags.length; j++) {
-                        if (j !== petObj.tags.length - 1) {
-                            petObj.description.concat(tags[j] + ", ");
-                        } else {
-                            petObj.description.concat(tags[j]);
-                        }
-                    }
-                }
-            }
-            petsArray.push(petObj);
-        }
-
-    }, 1000);
+        setTimeout(setPetData(data), 1000);
     console.log(data);
     setTimeout(displayPetCards, 2000);
     });
+
+}
+
+function setPetData(data) {
+            
+    for (var i = 0; i < 20; i++) {
+
+        var petObj = {
+            name: data.animals[i].name,
+            gender: data.animals[i].gender,
+            description: data.animals[i].description,
+            city: data.animals[i].contact.address.city,
+            state: data.animals[i].contact.address.state,
+            type: data.animals[i].type,
+            url: data.animals[i].url,
+            photo: '../assets/nophotoDog.png',
+            tags: data.animals[i].tags
+        } 
+
+        if (data.animals[i].primary_photo_cropped !== null && data.animals[i].primary_photo_cropped !== [] && data.animals[i].primary_photo_cropped !== undefined) {
+            petObj.photo = data.animals[i].primary_photo_cropped.medium;
+        } else if (data.animals[i].photos !== null && data.animals[i].photos !== [] &&  data.animals[i].photos !== undefined) {
+            petObj.photo = data.animals[i].photos[0];
+        } else {
+            petObj.photo = "../assets/nophotoDog.png";
+        }
+
+        if(petObj.description === null) {
+            petObj.description = "No description.";
+            if(petObj.tags !== null) {
+                petObj.description = "";
+                for (var j = 0; j < petObj.tags.length; j++) {
+                    if (j !== petObj.tags.length - 1) {
+                        petObj.description.concat(tags[j] + ", ");
+                    } else {
+                        petObj.description.concat(tags[j]);
+                    }
+                }
+            }
+        }
+        petsArray.push(petObj);
+    }
 
 }

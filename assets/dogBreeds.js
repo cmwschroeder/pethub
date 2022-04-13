@@ -26,18 +26,28 @@ populateList()
 select.change(listSelect)
 
 function listSelect() {
-    // var dogBreeds = {
-    //     name: data[i].name,
-    //     bred_for: data[i].bred_for,
-    //     breed_group: data[i].breed_group,
-    //     height: data[i].height.imperial,
-    //     life_span: data[i].life_span,
-    //     temperament: data[i].temperament,
-    //     origin: data[i].origin,
-    //     image: data[i].image.url
-    // }
-    // var imageEl = $('<img>')
-    // imageEl.attr('src', dogBreeds.image)
-    // breed.append(imageEl)
+    breed.html("")
+    var notFound = true
+    var i = 0
+    while (notFound) {
+        if (dogData[i].name === select.val()) {
+            notFound = false
+        } else { i++ }
+
+    }
+    var dogBreeds = {
+        name: dogData[i].name,
+        bred_for: dogData[i].bred_for,
+        breed_group: dogData[i].breed_group,
+        height: dogData[i].height.imperial,
+        life_span: dogData[i].life_span,
+        temperament: dogData[i].temperament,
+        origin: dogData[i].origin,
+        image: dogData[i].image.url
+    }
+    var imageEl = $('<img>')
+    imageEl.attr('src', dogBreeds.image)
+    breed.append(imageEl)
     console.log("hello is it me youre looking for")
+
 }

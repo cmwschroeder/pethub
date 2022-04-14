@@ -65,16 +65,17 @@ function displayFacts() {
     for(i = 0; i < animalFacts.length; i++) {
         
         //creating the carousel slide containers with unique ID at index "i"
-        var carouselBody = $(" <div id='slide" + i + "'class='carousel-item relative w-full bg-secondary rounded'>");
-        var carouselBtnDiv = $('<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">');
+        var carouselBody = $(" <div id='slide" + i + "'class='carousel-item relative w-full bg-secondary rounded bg-cover'>");
+        var carouselBtnDiv = $('<div class="absolute justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 hidden sm:flex">');
         var buttonLeft = $('<a class="btn btn-glass">');
         var buttonRight = $('<a class="btn btn-glass">');
-        var petImage = $("<img class='h-96 rounded'>");
+        var petImage = $("<img class='h-96 rounded hidden sm:inline'>");
         var factTitle = $("<h3 class= 'm-1 flex items-center mb-28'>");
         
         //needed to change button style
         factTitle.css("font-weight", "bold")
         factTitle.css("font-size", "large")
+        //carouselBody.css("background-image", "url('" + animalImages[i] + "')")
 
 
         //when the button right or left is setting conditions for where the carousel is currently at-beginning, end, middle
@@ -103,6 +104,7 @@ function displayFacts() {
         carouselBtnDiv.append(buttonLeft, buttonRight);
 
         console.log(carouselBody)
+
     }
 }
 

@@ -67,7 +67,7 @@ function listSelect() {
         // names
     var nameEl = $('<h1>')
     nameEl.text(dogBreeds.name)
-    nameEl.attr("style", "font-size:20px")
+    nameEl.attr("style", "font-size:30px")
     breedName.append(nameEl)
         //what they were bred for
     var bredEl = $('<p>')

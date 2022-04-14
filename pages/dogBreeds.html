@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link href='http://anijs.github.io/lib/anicollection/anicollection.css'>
+    <link rel="stylesheet" href="http://anijs.github.io/lib/anicollection/anicollection.css">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.13.6/dist/full.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../assets/style.css" />
     <title>PetHub</title>
@@ -15,37 +15,56 @@
 <body>
     <header>
         <div class="navbar bg-base-100">
-            <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl" href="../index.html"><img id="petHubLogo" src="../assets/media/PetHubLogo.png"></a>
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <label tabindex="0" class="btn btn-ghost lg:hidden">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </label>
+                    <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><a href="../pages/petFinder.html">Adopt</a></li>
+                        <li><a href="../pages/charity.html">Charities</a></li>
+                        <li><a href="../pages/dogBreeds.html">Breed Info</a></li>
+                        <li><a href="../pages/dogBreeds.html">Animal Facts</a></li>
+                    </ul>
+                </div>
+                <a href="../index.html" class="btn btn-ghost normal-case text-xl"><img id="petHubLogo" src="../assets/media/PetHubLogo.png">
             </div>
-            <div>
-                <select class="select select-warning w-full max-w-xs" id="dog">
-                    <option>Select breed</option>                   
-                  </select>
-            </div>
-            <div class="flex-none">
+            <div class="navbar-end hidden lg:flex">
                 <ul class="menu menu-horizontal p-0">
-                    <li><a href="../pages/petFinder.html">Pet Finder</a></li>
-                    <li><a href="../pages/animalFacts.html">Animal Facts</a></li>
-                    <li><a href="../pages/dogBreeds.html">Dog Breeds</a></li>
+                    <li><a href="../pages/petFinder.html">Adopt</a></li>
                     <li><a href="../pages/charity.html">Charities</a></li>
+                    <li><a href="../pages/dogBreeds.html">Breed Info</a></li>
+                    <li><a href="../pages/dogBreeds.html">Animal Facts</a></li>
                 </ul>
             </div>
         </div>
     </header>
 
-
+    <!-- 
     <div>
-        <h1 class="mb-5 text-5xl font-bold text-center" id="breedName"></h1>
+        <h1 class="mb-5 text-5xl font-bold text-center"></h1>
         <div id="infoDog" class="text-center"></div>
         <div class="hero min-h-screen items-center">
             <div class="w-96 items-top" id="breed">
-                <h1 class="mb-5 text-5xl font-bold text-center">PLEASE SELECT A BREED YOU WOULD LIKE TO KNOW ABOUT</h1>
+                <h1 class="mb-5 text-5xl font-bold text-center" id="more" data-anijs="if: mouseover, do: bounceInDown animated">PLEASE SELECT A BREED YOU WOULD LIKE TO KNOW ABOUT</h1>
             </div>
         </div>
-    </div>
+    </div> -->
+    <section class="flex flex-col items-center m-6">
+        <select class="select select-warning w-full max-w-xs" id="dog">
+            <option>Select breed</option>                   
+          </select>
+        <div class="card w-96 bg-neutral shadow-xl">
+            <div class="items-center">
+                <h1 class="m-6" id="breedName"></h1>
+            </div>
+            <div id="infoDog" class="card-body">
 
-
+                <p data-anijs="if: load, on:window, do: rotateIn animated" class="text-5xl">PLEASE SELECT A BREED YOU WOULD LIKE TO KNOW ABOUT</p>
+            </div>
+            <figure class="h-96 items-top" id="breed"><img src='../assets/media/nophotoDog.png'></figure>
+        </div>
+    </section>
 
     <footer class="footer p-10 bg-neutral text-neutral-content">
         <div>

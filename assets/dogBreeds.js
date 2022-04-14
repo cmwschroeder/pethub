@@ -67,30 +67,30 @@ function listSelect() {
         // names
     var nameEl = $('<h1>')
     nameEl.text(dogBreeds.name)
-    nameEl.attr("style", "font-size:60px")
+    nameEl.attr("style", "font-size:30px")
     breedName.append(nameEl)
         //what they were bred for
-    var bredEl = $('<p>', 'Bred For: ')
-    bredEl.text(dogBreeds.bred_for)
+    var bredEl = $('<p>')
+    bredEl.text('Bred For: ' + dogBreeds.bred_for)
     infoDog.append(bredEl)
         //what bred group they are
     var groupEl = $('<p>')
-    groupEl.text(dogBreeds.breed_group)
+    groupEl.text('Type: ' + dogBreeds.breed_group)
     infoDog.append(groupEl)
         // average life span
     var lifeSpanEl = $('<p>')
-    lifeSpanEl.text(dogBreeds.life_span)
+    lifeSpanEl.text('Life Span: ' + dogBreeds.life_span)
     infoDog.append(lifeSpanEl)
         //dog height
     var dogHeightEl = $('<p>')
-    dogHeightEl.text(dogBreeds.height)
+    dogHeightEl.text('Height(in): ' + dogBreeds.height)
     infoDog.append(dogHeightEl)
         //dogs temperament
     var temperamentEl = $('<p>')
-    temperamentEl.text(dogBreeds.temperament)
+    temperamentEl.text('Temperament: ' + dogBreeds.temperament)
     infoDog.append(temperamentEl)
         //origin of breed
     var originEl = $('<p>')
-    originEl.text(dogBreeds.origin)
+    originEl.text('Origin: ' + dogBreeds.origin)
     infoDog.append(originEl)
 }

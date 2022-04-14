@@ -70,7 +70,7 @@ function listSelect() {
     nameEl.attr("style", "font-size:60px")
     breedName.append(nameEl)
         //what they were bred for
-    var bredEl = $('<p>')
+    var bredEl = $('<p>', 'Bred For: ')
     bredEl.text(dogBreeds.bred_for)
     infoDog.append(bredEl)
         //what bred group they are

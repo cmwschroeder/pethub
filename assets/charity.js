@@ -21,6 +21,9 @@ var charityLinkEl = $('#charity-link');
 var charitySectEl = $("#charities-section");
 
 var gottenData = [];
+var printedStart;
+var printedFinish;
+var pageNum;
 
 //array of state abbreviations for filling so we don't clutter up html
 var states = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA',
@@ -71,7 +74,7 @@ function getResults() {
         requestUrl = "https://api.data.charitynavigator.org/v2/Organizations?app_id=" + apiId + "&app_key=" + apiKey + "&categoryID=1&zip=" + zip;
     }
     else {
-        requestUrl = "https://api.data.charitynavigator.org/v2/Organizations?app_id=" + apiId + "&app_key=" + apiKey + "&categoryID=1";
+        requestUrl = "https://api.data.charitynavigator.org/v2/Organizations?app_id=" + apiId + "&app_key=" + apiKey + "&categoryID=1&pageSize=200";
     }
 
     //fetch results from gathered user input
@@ -112,61 +115,24 @@ function getResults() {
             for(var i = 0; i < data.length; i++) {
                 gottenData[i] = data[i];
             }
-            //loop through the results and make a card for each result
-            for(var i = 0; i < resultNum; i++) {
-                //create a div to hold the entire card
-                var cardEl = $('<div>');
-                cardEl.addClass("card w-5/6 bg-base-100 shadow-xl mx-auto my-3");
-                //create a div that will be styled as the card body
-                var cardBodyEl = $('<div>');
-                cardBodyEl.addClass("card-body");
-                //create the content of the card, header and all paragraph information
-                var header = $('<h4>');
-                header.addClass("card-title");
-                header.text(data[i].organization.charityName);
-                var cardTaglineEl = $('<p>');
-                cardTaglineEl.text(data[i].tagLine);
-                var cardMailingEl = $('<p>');
-                cardMailingEl.text("Mailing address: " + data[i].mailingAddress.streetAddress1 + ", " + data[i].mailingAddress.city + 
-                ", " + data[i].mailingAddress.stateOrProvince + ", " + data[i].mailingAddress.postalCode);
-                var textRatingEl = $('<p>');
-                textRatingEl.text("Current Charity Navigator rating: ");
-                //create an image to hold the rating stars image
-                var ratingImgEl = $('<img>');
-                ratingImgEl.attr("src", data[i].currentRating.ratingImage.large);
-                //set these so the image doesn't become super huge and stays at normal dimensions
-                ratingImgEl.addClass("w-max h-max");
-                //create a div for the button so we can keep the button to the bottom left of the card
-                var btnDiv = $('<div>');
-                btnDiv.addClass("card-actions justify-end");
-                //create a readmore button that should open up a modal with the charities messaage and a link to the charities webpage
-                var readMoreBtn = $('<button>')
-                readMoreBtn.addClass("btn btn-secondary readMoreBtn");
-                readMoreBtn.attr("data-num", i);
-                readMoreBtn.text("Read More");
-
-                //append all of the elements together and then append them to the page
-                btnDiv.append(readMoreBtn);
-                cardBodyEl.append(header);
-                cardBodyEl.append(cardTaglineEl);
-                cardBodyEl.append(cardMailingEl);
-                cardBodyEl.append(textRatingEl);
-                cardBodyEl.append(ratingImgEl);
-                cardBodyEl.append(btnDiv);
-                cardEl.append(cardBodyEl);
-                charitySectEl.append(cardEl);
-            }
-            if(data.length > 50) {
+            //pass how many we want printed to the loadResults function
+            loadResults(0, resultNum);
+            printedStart = 0;
+            printedFinish = resultNum;
+            if(data.length > 20) {
                 var cycleBtnDiv = $('<div class="grid grid-cols-5 gap-0 m-3">');
-                var prevBtn = $('<button class="btn btn-primary w-full hidden">');
-                prevBtn.text("Previous")
-                var nextBtn = $('<button class="btn btn-secondary w-full col-start-5">');
-                nextBtn.text("Next");
-                cycleBtnDiv.append(prevBtn);
-                cycleBtnDiv.append(nextBtn);
+                var prevButEl = $('<button class="btn btn-primary w-full hidden" id="prev-button">');
+                prevButEl.text("Previous");
+                var nextButEl = $('<button class="btn btn-secondary w-full col-start-5" id="next-button">');
+                nextButEl.text("Next");
+                var pageEl = $('<p class="col-start-3 text-center text-xl">');
+                pageEl.text("Page 1");
+                pageNum = 1;
+                cycleBtnDiv.append(prevButEl);
+                cycleBtnDiv.append(pageEl);
+                cycleBtnDiv.append(nextButEl);
                 charitySectEl.append(cycleBtnDiv);
             }
-            ScrollReveal().reveal('.card');
         }
     });
 }
@@ -198,6 +164,139 @@ function fillStates() {
     }
 }
 
+/*
+ * This function will take the starting point and the ending point of the results that should be printed, will look at the stored data
+ * and print results from the start index to one below the finish index
+ */
+function loadResults(start, finish) {
+    for(var i = start; i < finish; i++) {
+        //create a div to hold the entire card
+        var cardEl = $('<div>');
+        cardEl.addClass("card w-5/6 bg-base-100 shadow-xl mx-auto my-3");
+        cardEl.attr("data-anijs", "if: scroll, on: window, do: zoomIn animated, before: scrollReveal");
+        //create a div that will be styled as the card body
+        var cardBodyEl = $('<div>');
+        cardBodyEl.addClass("card-body");
+        //create the content of the card, header and all paragraph information
+        var header = $('<h4>');
+        header.addClass("card-title");
+        header.text(gottenData[i].organization.charityName);
+        var cardTaglineEl = $('<p>');
+        cardTaglineEl.text(gottenData[i].tagLine);
+        var cardMailingEl = $('<p>');
+        cardMailingEl.text("Mailing address: " + gottenData[i].mailingAddress.streetAddress1 + ", " + gottenData[i].mailingAddress.city + 
+        ", " + gottenData[i].mailingAddress.stateOrProvince + ", " + gottenData[i].mailingAddress.postalCode);
+        var textRatingEl = $('<p>');
+        textRatingEl.text("Current Charity Navigator rating: ");
+        //create an image to hold the rating stars image
+        var ratingImgEl = $('<img>');
+        ratingImgEl.attr("src", gottenData[i].currentRating.ratingImage.large);
+        //set these so the image doesn't become super huge and stays at normal dimensions
+        ratingImgEl.addClass("w-max h-max");
+        //create a div for the button so we can keep the button to the bottom left of the card
+        var btnDiv = $('<div>');
+        btnDiv.addClass("card-actions justify-end");
+        //create a readmore button that should open up a modal with the charities messaage and a link to the charities webpage
+        var readMoreBtn = $('<button>')
+        readMoreBtn.addClass("btn btn-secondary readMoreBtn");
+        readMoreBtn.attr("data-num", i);
+        readMoreBtn.text("Read More");
+
+        //append all of the elements together and then append them to the page
+        btnDiv.append(readMoreBtn);
+        cardBodyEl.append(header);
+        cardBodyEl.append(cardTaglineEl);
+        cardBodyEl.append(cardMailingEl);
+        cardBodyEl.append(textRatingEl);
+        cardBodyEl.append(ratingImgEl);
+        cardBodyEl.append(btnDiv);
+        cardEl.append(cardBodyEl);
+        charitySectEl.append(cardEl);
+    }
+    // ScrollReveal().reveal('.card');
+    AniJS.run();
+}
+
+/*
+ * Function that will load the past 20 results, used so that we can have more results from API request without flooding the users screen
+ * with 100+ charities.
+ */
+function loadPastResults() {
+    //scroll back to the top of the page on click of this button
+    window.scroll(0, 0);
+    //clear html so that we can populate with other results
+    charitySectEl.html("");
+    //set the new printed finish = to the start of what we just printed to screen
+    printedFinish = printedStart;
+    //check to see if we are at 0 so we can basically refresh the search from the beginning printing the first 20 results
+    if(0 >= (printedFinish - 20)) {
+        printedStart = 0;
+        printedFinish = 20;
+    }
+    else {
+        printedStart -= 20;
+    }
+    //print the new results from the new start point to the new endpoint
+    loadResults(printedStart, printedFinish);
+
+    //create the buttons at the bottom as well as text showing what page number is printed
+    var cycleBtnDiv = $('<div class="grid grid-cols-5 gap-0 m-3">');
+    var prevButEl = $('<button class="btn btn-primary w-full" id="prev-button">');
+    prevButEl.text("Previous");
+    var nextButEl = $('<button class="btn btn-secondary w-full col-start-5" id="next-button">');
+    nextButEl.text("Next");
+    var pageEl = $('<p class="col-start-3 text-center text-xl">');
+    pageEl.text("Page " + (pageNum - 1));
+    pageNum--;
+    //if we are back at the start of the search results then remove the prev button from view since there are no
+    //previous elements
+    if(printedStart == 0) {
+        prevButEl.addClass("hidden");
+    }
+    //append all buttons and the p tag to page
+    cycleBtnDiv.append(prevButEl);
+    cycleBtnDiv.append(pageEl);
+    cycleBtnDiv.append(nextButEl);
+    charitySectEl.append(cycleBtnDiv);
+}
+
+function loadNextResults() {
+    //scroll back to the top of the page on click of this button
+    window.scroll(0, 0);
+    //clear html so that we can populate with other results
+    charitySectEl.html("");
+    //set the new printed start = to the finish of what we just printed to screen
+    printedStart = printedFinish;
+    //check to see if we are nearing the end so we don't try to print more results than we have
+    if(gottenData.length < (printedFinish + 20)) {
+        printedFinish = gottenData.length;
+    }
+    else {
+        printedFinish += 20;
+    }
+    loadResults(printedStart, printedFinish);
+
+    //create the buttons at the bottom as well as text showing what page number is printed
+    var cycleBtnDiv = $('<div class="grid grid-cols-5 gap-0 m-3">');
+    var prevButEl = $('<button class="btn btn-primary w-full" id="prev-button">');
+    prevButEl.text("Previous");
+    var nextButEl = $('<button class="btn btn-secondary w-full col-start-5" id="next-button">');
+    nextButEl.text("Next");
+    var pageEl = $('<p class="col-start-3 text-center text-xl">');
+    pageEl.text("Page " + (pageNum + 1));
+    pageNum++;
+    //if there are no more results after the end of what we just printed then hide the next button so we don't show
+    //more results than there are
+    if(printedFinish == gottenData.length) {
+        nextButEl.addClass("hidden");
+    }
+    //append all buttons and the p tag to page
+    cycleBtnDiv.append(prevButEl);
+    cycleBtnDiv.append(pageEl);
+    cycleBtnDiv.append(nextButEl);
+    charitySectEl.append(cycleBtnDiv);
+}
+
 //For when the user clicks on the button to search for charities
 subButEl.on("click", getResults);
 //For when the modal opens telling the user that there was an error searching for results
@@ -221,5 +320,9 @@ eggButEl.on("click", function() {
         html.attr("data-theme", "synthwave");
     }
 });
+
+//Clicking on the buttons that exist after the charity if there are enough results, will move to the next page of charities
+charitySectEl.on("click", "#prev-button", loadPastResults);
+charitySectEl.on("click", "#next-button", loadNextResults);
 
 fillStates();

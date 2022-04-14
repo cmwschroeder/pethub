@@ -3,19 +3,21 @@
 }
 
 #testimonials {
-    font-size: 130%;
+    font-size: 300%;
     font-weight: bold; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #testimonial-left {
-    border-right: 2px solid rgb(237, 214, 66);
+    border-bottom: 2px solid rgb(237, 214, 66);
+    justify-content: center;
 
 }
 
 #our-pets {
-
+    display: flex;
+    flex-wrap: wrap;
 }
 
 

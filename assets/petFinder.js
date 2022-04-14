@@ -4,6 +4,7 @@ var petTypeSelect = $("#petType");
 var petLocationInput = $("#petLocation")
 var errorModal = $("#errorModal");
 var errorText = $("#errorText");
+var closeModalEl = $("#closeModal");
 
 var petFinderUrl = "https://api.petfinder.com/v2/animals";
 var apiKey = "siwywcH8smVuYkQwaTxLaU7o5ukX7sk2DJNC8VmyzQEqEeABq8";
@@ -17,6 +18,13 @@ var currentPage = 1;
 pullPetFinderAuth();
 
 searchBtn.on("click", pullPetFinderData);
+
+closeModalEl.on("click", function() {
+    errorModal.removeClass("modal-open");
+
+    searchBtn.attr("class", "btn btn-primary");
+    searchBtn.text("Search");
+});
 
 function displayPetCards() {
     console.log(petsArray);
@@ -111,17 +119,14 @@ function pullPetFinderData() {
         })
     })
     .then(function (response) {
-        //check if we get 404 back from the api request and tell user
         if (response.status === 404) {
-          //open up a modal that will tell the user that no results were found
-          errorText.text("Hmm it seems");
-          noResultsEl.addClass("modal-open");
+          errorText.text("There are no animals for adoption near this location.");
+          errorModal.addClass("modal-open");
           return "";
         }
         else if(response.status == 400) {
-          //open up a modal that will tell the user that the inputs weren't in the correct form
-          searchErrorText.text("Search was not accepted as the search inputs were not valid");
-          noResultsEl.addClass("modal-open");
+          errorText.text("Please retry your search with proper formatting: City, State or Zip code.");
+          errorModal.addClass("modal-open");
           return "";
         }
     return response.json();

@@ -74,7 +74,7 @@ function getResults() {
         requestUrl = "https://api.data.charitynavigator.org/v2/Organizations?app_id=" + apiId + "&app_key=" + apiKey + "&categoryID=1&zip=" + zip;
     }
     else {
-        requestUrl = "https://api.data.charitynavigator.org/v2/Organizations?app_id=" + apiId + "&app_key=" + apiKey + "&categoryID=1";
+        requestUrl = "https://api.data.charitynavigator.org/v2/Organizations?app_id=" + apiId + "&app_key=" + apiKey + "&categoryID=1&pageSize=200";
     }
 
     //fetch results from gathered user input
@@ -215,13 +215,57 @@ function loadResults(start, finish) {
     ScrollReveal().reveal('.card');
 }
 
+/*
+ * Function that will load the past 20 results, used so that we can have more results from API request without flooding the users screen
+ * with 100+ charities.
+ */
 function loadPastResults() {
+    //scroll back to the top of the page on click of this button
+    window.scroll(0, 0);
+    //clear html so that we can populate with other results
     charitySectEl.html("");
+    //set the new printed finish = to the start of what we just printed to screen
+    printedFinish = printedStart;
+    //check to see if we are at 0 so we can basically refresh the search from the beginning printing the first 20 results
+    if(0 >= (printedFinish - 20)) {
+        printedStart = 0;
+        printedFinish = 20;
+    }
+    else {
+        printedStart -= 20;
+    }
+    //print the new results from the new start point to the new endpoint
+    loadResults(printedStart, printedFinish);
+
+    //create the buttons at the bottom as well as text showing what page number is printed
+    var cycleBtnDiv = $('<div class="grid grid-cols-5 gap-0 m-3">');
+    var prevButEl = $('<button class="btn btn-primary w-full" id="prev-button">');
+    prevButEl.text("Previous");
+    var nextButEl = $('<button class="btn btn-secondary w-full col-start-5" id="next-button">');
+    nextButEl.text("Next");
+    var pageEl = $('<p class="col-start-3 text-center text-xl">');
+    pageEl.text("Page " + (pageNum - 1));
+    pageNum--;
+    //if we are back at the start of the search results then remove the prev button from view since there are no
+    //previous elements
+    if(printedStart == 0) {
+        prevButEl.addClass("hidden");
+    }
+    //append all buttons and the p tag to page
+    cycleBtnDiv.append(prevButEl);
+    cycleBtnDiv.append(pageEl);
+    cycleBtnDiv.append(nextButEl);
+    charitySectEl.append(cycleBtnDiv);
 }
 
 function loadNextResults() {
+    //scroll back to the top of the page on click of this button
+    window.scroll(0, 0);
+    //clear html so that we can populate with other results
     charitySectEl.html("");
+    //set the new printed start = to the finish of what we just printed to screen
     printedStart = printedFinish;
+    //check to see if we are nearing the end so we don't try to print more results than we have
     if(gottenData.length < (printedFinish + 20)) {
         printedFinish = gottenData.length;
     }
@@ -230,6 +274,7 @@ function loadNextResults() {
     }
     loadResults(printedStart, printedFinish);
 
+    //create the buttons at the bottom as well as text showing what page number is printed
     var cycleBtnDiv = $('<div class="grid grid-cols-5 gap-0 m-3">');
     var prevButEl = $('<button class="btn btn-primary w-full" id="prev-button">');
     prevButEl.text("Previous");
@@ -238,9 +283,12 @@ function loadNextResults() {
     var pageEl = $('<p class="col-start-3 text-center text-xl">');
     pageEl.text("Page " + (pageNum + 1));
     pageNum++;
+    //if there are no more results after the end of what we just printed then hide the next button so we don't show
+    //more results than there are
     if(printedFinish == gottenData.length) {
         nextButEl.addClass("hidden");
     }
+    //append all buttons and the p tag to page
     cycleBtnDiv.append(prevButEl);
     cycleBtnDiv.append(pageEl);
     cycleBtnDiv.append(nextButEl);

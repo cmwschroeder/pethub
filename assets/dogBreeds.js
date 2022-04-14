@@ -3,7 +3,11 @@ var urlDog = 'https://api.thedogapi.com/v1/breeds?api_key=bc9bace5-c0cb-4315-a1a
 var select = $('#dog')
     // var img = 'https://api.thedogapi.com/v1/images/search'
 var breed = $("#breed")
+var breedName = $('#breedName')
+var infoDog = $('#infoDog')
 var dogData = []
+
+
 
 function populateList() {
     fetch(urlDog)
@@ -27,6 +31,8 @@ select.change(listSelect)
 
 function listSelect() {
     breed.html("")
+    breedName.html("")
+    infoDog.html("")
     var notFound = true
     var i = 0
     while (notFound) {
@@ -47,12 +53,14 @@ function listSelect() {
     }
     var imageEl = $('<img>')
     imageEl.attr('src', dogBreeds.image)
-    imageEl.attr('style', "h-100")
     breed.append(imageEl)
     console.log("hello is it me youre looking for")
     var nameEl = $('<h1>')
     nameEl.text(dogBreeds.name)
     nameEl.attr("style", "font-size:60px")
-    breed.append(nameEl)
+    breedName.append(nameEl)
+    var bredEl = $('<p>')
+    bredEl.text(dogBreeds.bred_for)
+    infoDog.append(bredEl)
 
 }

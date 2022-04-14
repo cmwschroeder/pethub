@@ -42,28 +42,43 @@ function listSelect() {
 
     }
     var dogBreeds = {
-        name: dogData[i].name,
-        bred_for: dogData[i].bred_for,
-        breed_group: dogData[i].breed_group,
-        height: dogData[i].height.imperial,
-        life_span: dogData[i].life_span,
-        temperament: dogData[i].temperament,
-        origin: dogData[i].origin,
-        image: dogData[i].image.url
-    }
+            //selected dog name
+            name: dogData[i].name,
+            //what selected dog they were bred for
+            bred_for: dogData[i].bred_for,
+            //what selected dog bred catergory they are
+            breed_group: dogData[i].breed_group,
+            //selected dog height
+            height: dogData[i].height.imperial,
+            //selected dog average life span
+            life_span: dogData[i].life_span,
+            //selected dog temperament
+            temperament: dogData[i].temperament,
+            //where selected dog originated from
+            origin: dogData[i].origin,
+            //grabs image of selected dog breed
+            image: dogData[i].image.url
+        }
+        //dog image
     var imageEl = $('<img>')
     imageEl.attr('src', dogBreeds.image)
     breed.append(imageEl)
     console.log("hello is it me youre looking for")
+        // names
     var nameEl = $('<h1>')
     nameEl.text(dogBreeds.name)
     nameEl.attr("style", "font-size:60px")
     breedName.append(nameEl)
+        //what they were bred for
     var bredEl = $('<p>')
     bredEl.text(dogBreeds.bred_for)
     infoDog.append(bredEl)
+        //what bred group they are
+    var groupEl = $('<p>')
+    groupEl.text(dogBreeds.breed_group)
+    infoDog.append(groupEl)
+        // average life span
     var lifeSpanEl = $('<p>')
     lifeSpanEl.text(dogBreeds.life_span)
     infoDog.append(lifeSpanEl)
-
 }

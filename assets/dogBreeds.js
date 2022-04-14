@@ -93,6 +93,4 @@ function listSelect() {
     var originEl = $('<p>')
     originEl.text(dogBreeds.origin)
     infoDog.append(originEl)
-
-
 }

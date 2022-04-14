@@ -23,6 +23,7 @@ var charitySectEl = $("#charities-section");
 var gottenData = [];
 var printedStart;
 var printedFinish;
+var pageNum;
 
 //array of state abbreviations for filling so we don't clutter up html
 var states = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA',
@@ -104,8 +105,8 @@ function getResults() {
         }
         //Only show 20 results per page
         var resultNum;
-        if(data.length > 15) {
-            resultNum = 15;
+        if(data.length > 20) {
+            resultNum = 20;
         } else {
             resultNum = data.length;
         }
@@ -118,14 +119,15 @@ function getResults() {
             loadResults(0, resultNum);
             printedStart = 0;
             printedFinish = resultNum;
-            if(data.length > 15) {
+            if(data.length > 20) {
                 var cycleBtnDiv = $('<div class="grid grid-cols-5 gap-0 m-3">');
-                var prevButEl = $('<button class="btn btn-primary w-full hidden" id="prev-button>');
-                prevButEl.text("Previous")
+                var prevButEl = $('<button class="btn btn-primary w-full hidden" id="prev-button">');
+                prevButEl.text("Previous");
                 var nextButEl = $('<button class="btn btn-secondary w-full col-start-5" id="next-button">');
                 nextButEl.text("Next");
                 var pageEl = $('<p class="col-start-3 text-center text-xl">');
                 pageEl.text("Page 1");
+                pageNum = 1;
                 cycleBtnDiv.append(prevButEl);
                 cycleBtnDiv.append(pageEl);
                 cycleBtnDiv.append(nextButEl);
@@ -214,11 +216,35 @@ function loadResults(start, finish) {
 }
 
 function loadPastResults() {
-
+    charitySectEl.html("");
 }
 
 function loadNextResults() {
+    charitySectEl.html("");
+    printedStart = printedFinish;
+    if(gottenData.length < (printedFinish + 20)) {
+        printedFinish = gottenData.length;
+    }
+    else {
+        printedFinish += 20;
+    }
+    loadResults(printedStart, printedFinish);
 
+    var cycleBtnDiv = $('<div class="grid grid-cols-5 gap-0 m-3">');
+    var prevButEl = $('<button class="btn btn-primary w-full" id="prev-button">');
+    prevButEl.text("Previous");
+    var nextButEl = $('<button class="btn btn-secondary w-full col-start-5" id="next-button">');
+    nextButEl.text("Next");
+    var pageEl = $('<p class="col-start-3 text-center text-xl">');
+    pageEl.text("Page " + (pageNum + 1));
+    pageNum++;
+    if(printedFinish == gottenData.length) {
+        nextButEl.addClass("hidden");
+    }
+    cycleBtnDiv.append(prevButEl);
+    cycleBtnDiv.append(pageEl);
+    cycleBtnDiv.append(nextButEl);
+    charitySectEl.append(cycleBtnDiv);
 }
 
 //For when the user clicks on the button to search for charities

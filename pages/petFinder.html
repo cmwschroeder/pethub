@@ -22,19 +22,30 @@
 
 <body>
     <header>
-        <div class="navbar bg-base-100">
-            <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl" href="../index.html"><img id="petHubLogo" src="../assets/media/PetHubLogo.png"/></a>
-            </div>
-            <div class="flex-none">
-                <ul class="menu menu-horizontal p-0">
-                  <li><a href="../pages/petFinder.html">Adopt</a></li>
-                  <li><a href="../pages/charity.html">Charities</a></li>
-                  <li><a href="../pages/dogBreeds.html">Breed Info</a></li>
-                  <li><a href="../pages/animalFacts.html">Animal Facts</a></li>
-                </ul>
-            </div>
+      <div class="navbar bg-base-100">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <label tabindex="0" class="btn btn-ghost lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
+            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+              <li><a href="../pages/petFinder.html">Adopt</a></li>
+              <li><a href="../pages/charity.html">Charities</a></li>
+              <li><a href="../pages/dogBreeds.html">Breed Info</a></li>
+              <li><a href="../pages/dogBreeds.html">Animal Facts</a></li>
+            </ul>
+          </div>
+          <a href="../index.html" class="btn btn-ghost normal-case text-xl"><img id="petHubLogo" src="../assets/media/PetHubLogo.png">
         </div>
+        <div class="navbar-end hidden lg:flex">
+          <ul class="menu menu-horizontal p-0">
+            <li><a href="../pages/petFinder.html">Adopt</a></li>
+            <li><a href="../pages/charity.html">Charities</a></li>
+            <li><a href="../pages/dogBreeds.html">Breed Info</a></li>
+            <li><a href="../pages/animalFacts.html">Animal Facts</a></li>
+          </ul>
+        </div>
+      </div>
     </header>
 
     <!-- jumbotron with button and content -->
@@ -50,7 +61,7 @@
       </div>
 
 
-    <section class="p-8 mx-4" style="display:flex;justify-content:space-evenly;flex-wrap: wrap;">
+    <section class="flex sm:justify-evenly justify-start flex-wrap p-8 mx-4">
 
       <select id="petType" class="select select-bordered w-full max-w-xs">
         <option value="All">All Animals</option>
@@ -60,7 +71,7 @@
         <option value="rabbit">Rabbits</option>
       </select>
 
-      <div class="form-control w-full max-w-xs mx-4">
+      <div class="form-control w-full max-w-xs">
           <div class="form-control">
               <label class="input-group">
                 <span>Location</span>

@@ -228,5 +228,5 @@ $(window).scroll(function() {
 
 //this function will scroll the user to the top of the page
 function returnTopFunction() {
-    window.scrollTo(0,0);
+    $("html, body").animate({ scrollTop: "0" });
 }

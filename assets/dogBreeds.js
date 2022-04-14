@@ -94,3 +94,12 @@ function listSelect() {
     originEl.text('Origin: ' + dogBreeds.origin)
     infoDog.append(originEl)
 }
+
+$('#egg').on('click', function() {
+    if ('cyberpunk' === $('html').attr('data-theme')) {
+        $('html').attr('data-theme', 'luxury')
+    } else {
+        $('html').attr('data-theme', 'cyberpunk')
+
+    }
+})

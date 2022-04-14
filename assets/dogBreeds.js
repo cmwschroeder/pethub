@@ -81,4 +81,18 @@ function listSelect() {
     var lifeSpanEl = $('<p>')
     lifeSpanEl.text(dogBreeds.life_span)
     infoDog.append(lifeSpanEl)
+        //dog height
+    var dogHeightEl = $('<p>')
+    dogHeightEl.text(dogBreeds.height)
+    infoDog.append(dogHeightEl)
+        //dogs temperament
+    var temperamentEl = $('<p>')
+    temperamentEl.text(dogBreeds.temperament)
+    infoDog.append(temperamentEl)
+        //origin of breed
+    var originEl = $('<p>')
+    originEl.text(dogBreeds.origin)
+    infoDog.append(originEl)
+
+
 }

@@ -39,9 +39,6 @@ closeModalEl.on("click", function() {
 //this function displays all the cards with pets available for adoption
 function displayPetCards() {
 
-    //keep this console log until we're completely done with this page
-    console.log(petsArray);
-
     //set the search button back to normal now that the pet cards are done loading
     searchBtn.attr("class", "btn btn-primary");
     searchBtn.text("Search");
@@ -105,30 +102,40 @@ function displayPetCards() {
 //this function uses my apikey and apisecret to get an access token
 function pullPetFinderAuth() {
     fetch('https://api.petfinder.com/v2/oauth2/token', {
-        //we are using the post method because we are posting the
-        //apikey and apisecret
+        //we are using the post method because we are submitting
+        //a form to the server (requesting an oath2 token)
     method: 'POST',
     headers: {
-        //we are setting the content type as one big query string
+        //basically here we are setting the content type as one big query string
+        //because the data we're sending is urlencoded
         'Content-Type': 'application/x-www-form-urlencoded',
     },
+    //here we are setting the body data in the fetch to the 
+    //url the petfinder api uses to generate a api access token
     body: 'grant_type=client_credentials&client_id=' + apiKey + '&client_secret=' + apiSecret
     })
     .then(function (response) {
     return response.json();
     })
     .then(function (data) {
+        //here we store the access token so we can use it
+        //in our other fetch request
        apiAuthBearer = data.access_token;
     pullPetFinderData();
     });
 }
 
+//this function pulls data from the petfinder api based on what
+//we're looking for
 function pullPetFinderData() {
+    //set the button to loading so the user doesn't click it again
     searchBtn.attr("class", "btn loading");
     searchBtn.text("loading");
 
+    //set the generic/default url so we always have a url
     var petFinderUrl = "https://api.petfinder.com/v2/animals";
 
+    //these conditionals check what the user chose in their form
     if (petTypeSelect.children("option:selected").val() === "All" && petLocationInput.val() === "") {
         petFinderUrl = "https://api.petfinder.com/v2/animals?limit=100";
     } else if (petTypeSelect.children("option:selected").val() !== "All" && petLocationInput.val() === "") {
@@ -139,13 +146,17 @@ function pullPetFinderData() {
         petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val() + "&location=" + petLocationInput.val() + "&limit=100";
     }
 
+    //here we fetch the data for the pets using the URL we generated above
     fetch(petFinderUrl, {
         method: 'GET',
+        //we have to use these headers to pass our oath2 key
         headers: new Headers({
             'Authorization': 'Bearer ' +  apiAuthBearer
         })
     })
     .then(function (response) {
+        //we set conditionals to put up a modal alerting the user
+        //either they made a mistake or there are no results
         if (response.status === 404) {
           errorText.text("There are no animals for adoption near this location.");
           errorModal.addClass("modal-open");
@@ -159,12 +170,15 @@ function pullPetFinderData() {
     return response.json();
     })
     .then(function (data) {
+        //we are calling the setpetdata function but with a delay
+        //to allow the api call to fully process
         setTimeout(setPetData(data), 1000);
-    console.log(data);
     });
 
 }
 
+//here we are setting the pet data to an object and pushing
+//the object to the pet array
 function setPetData(data) {
     
     if (petsArray.length > 0) {
@@ -195,11 +209,15 @@ function setPetData(data) {
 
         petsArray.push(petObj);
     }
-    setTimeout(displayPetCards, 2000);
+    displayPetCards();
 }
 
+//set an event listener on the to top button to call the function
+//that sends the user back to the top of the page
 toTopBtn.on("click", returnTopFunction);
 
+//this function checks if the user has scrolled down the page
+//at least 50px and then makes the button visible
 $(window).scroll(function() {
     if ($(this).scrollTop() >= 50) {
         toTopBtn.fadeIn(200);
@@ -208,7 +226,7 @@ $(window).scroll(function() {
     }
 });
 
-// When the user clicks on the button, scroll to the top of the document
+//this function will scroll the user to the top of the page
 function returnTopFunction() {
     window.scrollTo(0,0);
 }

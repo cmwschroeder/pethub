@@ -47,8 +47,8 @@
         </div>
     </header>
 
-    <main class="grid grid-cols-4 gap-0">
-        <section class="min-h-screen bg-base-200 pl-3">
+    <main class="flex flex-wrap flex-column sm:grid sm:grid-cols-4 sm:gap-0">
+        <section class="sm:min-h-screen bg-base-200 pl-3">
             <h2 class="text-3xl text-primary">Charity Search: </h2><br />
             <p class="text-lg text-primary">Fill in any of the inputs, leave blank for all animal charities</p><br />
             <div class="form-control w-full">
@@ -68,9 +68,54 @@
             <button class="btn btn-link absolute" id="egg-button"></button>
         </section>
 
-        <section class="col-span-3 min-h-screen bg-base-300" id="charities-section">
+        <section class="sm:col-span-3 sm:min-h-screen bg-base-300" id="charities-section">
         </section>
     </main>
+
+    <h4 class="text-2xl">Recommended Charities:</h4>
+
+    <section class="flex flex-row flex-wrap justify-center">
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-3">
+        <figure><img src="../assets/media/bestFriends.png" alt="Best Friends Animal Society Logo" /></figure>
+        <div class="card-body">
+          <h5 class="card-title">Best Friends Animal Society</h5>
+          <p>Mission: To bring about a time when there are no more homeless pets</p>
+          <div class="card-actions justify-end">
+            <a class="btn btn-primary" href="https://bestfriends.org/" target="_blank">Visit Website</a>
+          </div>
+        </div>
+      </div>
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-3">
+        <figure><img src="../assets/media/aspca-logo-square.png" alt="ASPCA Logo" /></figure>
+        <div class="card-body">
+          <h5 class="card-title">ASPCA</h5>
+          <p>Mission: To provide effective means for the prevention of cruelty to animals throughout the United States.</p>
+          <div class="card-actions justify-end">
+            <a class="btn btn-primary" href="https://www.aspca.org/" target="_blank">Visit Website</a>
+          </div>
+        </div>
+      </div>
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-3">
+        <figure><img src="../assets/media/awi.png" alt="Animal Welfare Institute logo" /></figure>
+        <div class="card-body">
+          <h5 class="card-title">Animal Welfare Institute</h5>
+          <p>Mission: To save all living animals from any form of inhumane and violent treatment</p>
+          <div class="card-actions justify-end">
+            <a class="btn btn-primary" href="https://awionline.org/" target="_blank">Visit Website</a>
+          </div>
+        </div>
+      </div>
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-3">
+        <figure><img src="../assets/media/bwar.png" alt="Brother Wolf Animal Rescue logo" /></figure>
+        <div class="card-body">
+          <h2 class="card-title">Brother Wolf Animal Rescue</h2>
+          <p>Mission: To better the lives of companion animals and the people who love them.</p>
+          <div class="card-actions justify-end">
+            <a class="btn btn-primary" href="https://www.bwar.org/" target="_blank">Visit Website</a>
+          </div>
+        </div>
+      </div>
+    </section> 
 
     <footer class="footer p-10 bg-neutral text-neutral-content">
         <div>

@@ -6,6 +6,7 @@ var petLocationInput = $("#petLocation")
 var errorModal = $("#errorModal");
 var errorText = $("#errorText");
 var closeModalEl = $("#closeModal");
+var toTopBtn = $("#toTopBtn");
 
 // initialize variables related to the fetch requests
 var petFinderUrl = "https://api.petfinder.com/v2/animals";
@@ -195,4 +196,19 @@ function setPetData(data) {
         petsArray.push(petObj);
     }
     setTimeout(displayPetCards, 2000);
+}
+
+toTopBtn.on("click", returnTopFunction);
+
+$(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {
+        toTopBtn.fadeIn(200);
+    } else {
+        toTopBtn.fadeOut(200);
+    }
+});
+
+// When the user clicks on the button, scroll to the top of the document
+function returnTopFunction() {
+    window.scrollTo(0,0);
 }

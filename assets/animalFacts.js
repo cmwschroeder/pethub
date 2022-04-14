@@ -70,11 +70,15 @@ function displayFacts() {
     
         var carouselBody = $(" <div id='slide" + i + "'class='carousel-item relative w-full bg-secondary rounded'>");
         var carouselBtnDiv = $('<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">');
-        var buttonLeft = $('<a class="btn btn-circle">');
-        var buttonRight = $('<a class="btn btn-circle">');
+        var buttonLeft = $('<a class="btn btn-glass">');
+        var buttonRight = $('<a class="btn btn-glass">');
         var petImage = $("<img class='h-96 rounded'>");
-        var factTitle = $("<h3 m-auto>");
-        
+        var factTitle = $("<h3 class= 'm-1 flex items-center mb-28'>");
+
+        factTitle.css("font-weight", "bold")
+        factTitle.css("font-size", "large")
+
+
         //when the button right or left is setting conditions for where the carousel is currently at-beginning, end, middle
         if(i === 0) {
             buttonLeft.attr("href", "#slide" + (animalFacts.length -1)); 

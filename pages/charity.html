@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.13.6/dist/full.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://anijs.github.io/lib/anicollection/anicollection.css">
     <link href="../assets/style.css" rel="stylesheet" type="text/css" />
     <title>PetHub</title>
 </head>
@@ -75,7 +76,7 @@
     <h4 class="text-2xl">Recommended Charities:</h4>
 
     <section class="flex flex-row flex-wrap justify-center">
-      <div class="card w-96 bg-base-100 shadow-xl image-full m-3">
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-3" data-anijs="if: click, on: .card, do: zoomInLeft animated, before: scrollReveal">
         <figure><img src="../assets/media/bestFriends.png" alt="Best Friends Animal Society Logo" /></figure>
         <div class="card-body">
           <h5 class="card-title">Best Friends Animal Society</h5>
@@ -85,7 +86,7 @@
           </div>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-xl image-full m-3">
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-3" data-anijs="if: scroll, on: window, do: bounceIn animated, before: scrollReveal">
         <figure><img src="../assets/media/aspca-logo-square.png" alt="ASPCA Logo" /></figure>
         <div class="card-body">
           <h5 class="card-title">ASPCA</h5>
@@ -95,7 +96,7 @@
           </div>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-xl image-full m-3">
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-3" data-anijs="if: scroll, on: window, do: rotateIn animated, before: scrollReveal">
         <figure><img src="../assets/media/awi.png" alt="Animal Welfare Institute logo" /></figure>
         <div class="card-body">
           <h5 class="card-title">Animal Welfare Institute</h5>
@@ -105,7 +106,7 @@
           </div>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-xl image-full m-3">
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-3" data-anijs="if: scroll, on: window, do: zoomInLeft animated, before: scrollReveal">
         <figure><img src="../assets/media/bwar.png" alt="Brother Wolf Animal Rescue logo" /></figure>
         <div class="card-body">
           <h2 class="card-title">Brother Wolf Animal Rescue</h2>
@@ -161,10 +162,12 @@
         </div>
       </footer>
 
-    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- <script src="https://unpkg.com/scrollreveal"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/ani/anijs.js"></script>
+    <script src="../assets/ani/helpers/scrollreveal/anijs-helper-scrollreveal.js"></script>
     <script src="../assets/charity.js"></script>
 </body>
 

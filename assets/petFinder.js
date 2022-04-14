@@ -1,3 +1,4 @@
+// initialize all the pointers to HTML elements we will manipulate
 var searchBtn = $("#searchBtn");
 var petsSectionEl = $("#pets");
 var petTypeSelect = $("#petType");
@@ -6,36 +7,52 @@ var errorModal = $("#errorModal");
 var errorText = $("#errorText");
 var closeModalEl = $("#closeModal");
 
+// initialize variables related to the fetch requests
 var petFinderUrl = "https://api.petfinder.com/v2/animals";
 var apiKey = "siwywcH8smVuYkQwaTxLaU7o5ukX7sk2DJNC8VmyzQEqEeABq8";
 var apiSecret = "kFtKSHvS38045Ixyzok8EtG9BdouqbfU3CMdC1iK";
-
 var apiAuthBearer;
 
+//we will store pets in this array
 var petsArray = [];
+
+//this will keep track of what page number we are on
 var currentPage = 1;
 
+// call the petfinder authentication function
 pullPetFinderAuth();
 
+//this event listener listens for clicks on the search button
 searchBtn.on("click", pullPetFinderData);
 
+//this event listener listens for when we click to close the error modal
 closeModalEl.on("click", function() {
+    //remove the modal-open class so it goes off the screen
     errorModal.removeClass("modal-open");
 
+    //set the button back so it is not in the loading state anymore
     searchBtn.attr("class", "btn btn-primary");
     searchBtn.text("Search");
 });
 
+//this function displays all the cards with pets available for adoption
 function displayPetCards() {
+
+    //keep this console log until we're completely done with this page
     console.log(petsArray);
 
+    //set the search button back to normal now that the pet cards are done loading
     searchBtn.attr("class", "btn btn-primary");
     searchBtn.text("Search");
 
+    //this for loop creates the cards for all the pet objects
     for (var i = 0; i < petsArray.length; i++) {
+        
+        //using jquery we can create the div with all the classes in one line
         var tempCardEl = $("<div class='card w-96 bg-base-100 shadow-xl m-3'>");
         petsSectionEl.append(tempCardEl);
 
+        //this conditional statement sets a photo for animals without one
         if (petsArray[i].photo === undefined) {
             if(petsArray[i].type === "Dog") {
                 petsArray[i].photo = "../assets/media/nophotoDog.png";
@@ -43,11 +60,15 @@ function displayPetCards() {
                 petsArray[i].photo = "../assets/media/nophotoCat.png";
             } else if (petsArray[i].type === "Bird") {
                 petsArray[i].photo = "../assets/media/nophotoBird.png";
-            } else {
+            } else if (petsArray[i].type === "Rabbit"){
                 petsArray[i].photo = "../assets/media/nophotoRabbit.png";
+            } else {
+                petsArray[i].photo = "../assets/media/nophotoOther.png";
             }
         }
 
+        //the following temp elements are used to place all the
+        //proper data/images to the card for this pet object
         var tempCardImg = $("<figure class='bg-cover h-96' style='background-image: url(\"" + petsArray[i].photo + "\");'</figure>");
         tempCardEl.append(tempCardImg);
 
@@ -76,13 +97,18 @@ function displayPetCards() {
         var tempCardBtn = $("<a href='" + petsArray[i].url + "' target='_blank'><button class='btn btn-primary'>View</button></a>");
         tempCardAction.append(tempCardBtn);
     }
+    ScrollReveal().reveal('.card');
 
 }
 
+//this function uses my apikey and apisecret to get an access token
 function pullPetFinderAuth() {
     fetch('https://api.petfinder.com/v2/oauth2/token', {
+        //we are using the post method because we are posting the
+        //apikey and apisecret
     method: 'POST',
     headers: {
+        //we are setting the content type as one big query string
         'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: 'grant_type=client_credentials&client_id=' + apiKey + '&client_secret=' + apiSecret
@@ -103,13 +129,13 @@ function pullPetFinderData() {
     var petFinderUrl = "https://api.petfinder.com/v2/animals";
 
     if (petTypeSelect.children("option:selected").val() === "All" && petLocationInput.val() === "") {
-        petFinderUrl = "https://api.petfinder.com/v2/animals";
+        petFinderUrl = "https://api.petfinder.com/v2/animals?limit=100";
     } else if (petTypeSelect.children("option:selected").val() !== "All" && petLocationInput.val() === "") {
-        petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val(); 
+        petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val() + "&limit=100"; 
     } else if (petTypeSelect.children("option:selected").val() === "All"){
-        petFinderUrl = "https://api.petfinder.com/v2/animals?location=" + petLocationInput.val();
+        petFinderUrl = "https://api.petfinder.com/v2/animals?location=" + petLocationInput.val() + "&limit=100";
     } else {
-        petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val() + "&location=" + petLocationInput.val();
+        petFinderUrl = "https://api.petfinder.com/v2/animals?type=" + petTypeSelect.children("option:selected").val() + "&location=" + petLocationInput.val() + "&limit=100";
     }
 
     fetch(petFinderUrl, {

@@ -62,5 +62,8 @@ function listSelect() {
     var bredEl = $('<p>')
     bredEl.text(dogBreeds.bred_for)
     infoDog.append(bredEl)
+    var lifeSpanEl = $('<p>')
+    lifeSpanEl.text(dogBreeds.life_span)
+    infoDog.append(lifeSpanEl)
 
 }

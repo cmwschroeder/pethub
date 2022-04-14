@@ -35,7 +35,26 @@ var animalFacts = [
 
 var animalImages = [
 ///link all picture refs
-"../assets/media/kittens.jpg"
+"../assets/media/animal-carousel/cat-1.jpg",
+"../assets/media/animal-carousel/dog-1.jpg",
+"../assets/media/animal-carousel/cat-2.jpg",
+"../assets/media/animal-carousel/dog-2.jpg",
+"../assets/media/animal-carousel/cat-3.jpg",
+"../assets/media/animal-carousel/dog-3.jpg",
+"../assets/media/animal-carousel/cat-4.jpg",
+"../assets/media/animal-carousel/dog-4.jpg",
+"../assets/media/animal-carousel/cat-5.jpg",
+"../assets/media/animal-carousel/dog-5.jpg",
+"../assets/media/animal-carousel/cat-6.jpg",
+"../assets/media/animal-carousel/dog-6.jpg",
+"../assets/media/animal-carousel/cat-7.jpg",
+"../assets/media/animal-carousel/dog-7.jpg",
+"../assets/media/animal-carousel/cat-8.jpg",
+"../assets/media/animal-carousel/dog-8.jpg",
+"../assets/media/animal-carousel/cat-9.jpg",
+"../assets/media/animal-carousel/dog-9.jpg",
+"../assets/media/animal-carousel/cat-10.jpg",
+"../assets/media/animal-carousel/dog-10.jpg"
 
 
 ]
@@ -69,7 +88,7 @@ function displayFacts() {
         }
         
         
-        petImage.attr("src", animalImages[0]);
+        petImage.attr("src", animalImages[i]);
         factTitle.text(animalFacts[i]);
         buttonRight.text("❯");
         buttonLeft.text("❮")

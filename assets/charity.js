@@ -173,7 +173,7 @@ function loadResults(start, finish) {
         //create a div to hold the entire card
         var cardEl = $('<div>');
         cardEl.addClass("card w-5/6 bg-base-100 shadow-xl mx-auto my-3");
-        cardEl.attr("data-anijs", "if: scroll, on: window, do: zoomIn animated, before: scrollReveal");
+        cardEl.attr("data-anijs", "if: scroll, on: window, do: fadeInRight animated, before: scrollReveal");
         //create a div that will be styled as the card body
         var cardBodyEl = $('<div>');
         cardBodyEl.addClass("card-body");

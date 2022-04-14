@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" data-theme="synthwave">
+<html lang="en-us" data-theme="luxury">
 
 <head>
     <meta charset="UTF-8" />
@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="http://anijs.github.io/lib/anicollection/anicollection.css">
     <link href="../assets/style.css" rel="stylesheet" type="text/css" />
     <title>PetHub</title>
+    <link rel="icon" type="image/x-icon" href="../assets/media/PetHubLogo.png">
 </head>
 
-<!-- Put this part before </body> tag -->
 <div class="modal" id="404-modal">
   <div class="modal-box">
     <h3 class="font-bold text-lg">Error!</h3>
@@ -32,21 +32,30 @@
 </div>
 
 <body>
-    <header>
-        <div class="navbar bg-base-100">
-            <div class="flex-1">
-                <a href="../index.html" class="btn btn-ghost normal-case text-xl"><img id="petHubLogo" src="../assets/media/PetHubLogo.png"></a>
-            </div>
-            <div class="flex-none">
-                <ul class="menu menu-horizontal p-0">
-                    <li><a href="../pages/petFinder.html">Pet Finder</a></li>
-                    <li><a href="../pages/animalFacts.html">Animal Facts</a></li>
-                    <li><a href="../pages/dogBreeds.html">Dog Breeds</a></li>
-                    <li><a href="../pages/charity.html">Charities</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
+  <div class="navbar bg-base-100">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <label tabindex="0" class="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        </label>
+        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a href="../pages/petFinder.html">Adopt</a></li>
+          <li><a href="../pages/charity.html">Charities</a></li>
+          <li><a href="../pages/dogBreeds.html">Breed Info</a></li>
+          <li><a href="../pages/dogBreeds.html">Animal Facts</a></li>
+        </ul>
+      </div>
+      <a href="../index.html" class="btn btn-ghost normal-case text-xl"><img id="petHubLogo" src="../assets/media/PetHubLogo.png">
+    </div>
+    <div class="navbar-end hidden lg:flex">
+      <ul class="menu menu-horizontal p-0">
+        <li><a href="../pages/petFinder.html">Adopt</a></li>
+        <li><a href="../pages/charity.html">Charities</a></li>
+        <li><a href="../pages/dogBreeds.html">Breed Info</a></li>
+        <li><a href="../pages/dogBreeds.html">Animal Facts</a></li>
+      </ul>
+    </div>
+  </div>
 
     <main class="flex flex-wrap flex-column sm:grid sm:grid-cols-4 sm:gap-0">
         <section class="sm:min-h-screen bg-base-200 pl-3">
@@ -76,7 +85,7 @@
     <h4 class="text-2xl">Recommended Charities:</h4>
 
     <section class="flex flex-row flex-wrap justify-center">
-      <div class="card w-96 bg-base-100 shadow-xl image-full m-3" data-anijs="if: click, on: .card, do: zoomInLeft animated, before: scrollReveal">
+      <div class="card w-96 bg-base-100 shadow-xl image-full m-3" data-anijs="if: scroll, on: window, do: flip animated, before: scrollReveal">
         <figure><img src="../assets/media/bestFriends.png" alt="Best Friends Animal Society Logo" /></figure>
         <div class="card-body">
           <h5 class="card-title">Best Friends Animal Society</h5>

@@ -2,10 +2,9 @@
 var factCards = $("#fact-cards")
 var carouselContainer = $("#carouselContainer")
 
-//next two functions need to generate on page load
 
-//will need function to fetch api for cat facts
 
+//facts for both cats and dogs-alternating from cat to dog so on carousel it will alternate between the cat and dog facts
 var animalFacts = [
     "A cat\’s average lifespan increased by a year over the span of time between 2002 and 2012, according to a study by Banfield Pet Hospital.",
     " A comprehensive review of studies published between 1950 and 2019 found that dog owners had a lower risk of death.",
@@ -31,10 +30,8 @@ var animalFacts = [
 
 
 
-//will need api to fetch dog facts
-
+//Images for both cats and dogs-alternating from cat to dog so on carousel it will alternate images to match with facts
 var animalImages = [
-///link all picture refs
 "../assets/media/animal-carousel/cat-1.jpg",
 "../assets/media/animal-carousel/dog-1.jpg",
 "../assets/media/animal-carousel/cat-2.jpg",
@@ -60,21 +57,22 @@ var animalImages = [
 ]
 
 
-//will need to dynamically generate card-like features to append the dog facts and pictures
 
+//function for displaying the facts and images on the carousel portion of page
 function displayFacts() {
 
     // generates every carousel slide(30)
     for(i = 0; i < animalFacts.length; i++) {
+        
         //creating the carousel slide containers with unique ID at index "i"
-    
         var carouselBody = $(" <div id='slide" + i + "'class='carousel-item relative w-full bg-secondary rounded'>");
         var carouselBtnDiv = $('<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">');
         var buttonLeft = $('<a class="btn btn-glass">');
         var buttonRight = $('<a class="btn btn-glass">');
         var petImage = $("<img class='h-96 rounded'>");
         var factTitle = $("<h3 class= 'm-1 flex items-center mb-28'>");
-
+        
+        //needed to change button style
         factTitle.css("font-weight", "bold")
         factTitle.css("font-size", "large")
 
@@ -92,6 +90,7 @@ function displayFacts() {
         }
         
         
+        //for carousel to display all images within loop at the different indexes
         petImage.attr("src", animalImages[i]);
         factTitle.text(animalFacts[i]);
         buttonRight.text("❯");
@@ -102,7 +101,10 @@ function displayFacts() {
         carouselBody.append(carouselBtnDiv);
         carouselBody.append(petImage, factTitle)
         carouselBtnDiv.append(buttonLeft, buttonRight);
+
+        console.log(carouselBody)
     }
 }
-    
+
+//want this function to run on page load
 displayFacts();

@@ -30,20 +30,10 @@ var states = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI',
              'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
              'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
-function getResults() {
+function getResults(city, state, zip) {
     //make the submit button into a loading symbol
     subButEl.addClass("loading btn-disabled");
     subButEl.text("Loading")
-    //user inputs from page
-    var city = cityEl.val();
-    var state = stateEl.val();
-    var zip = zipEl.val();
-
-    // reset vals in input and remove current cards from page
-    cityEl.val("");
-    stateEl.val("State");
-    zipEl.val("");
-    charitySectEl.html("");
 
     //used for requesting from api
     var apiKey = "936fdb7979c2cbede08758d1d96e0f9b";
@@ -297,8 +287,43 @@ function loadNextResults() {
     charitySectEl.append(cycleBtnDiv);
 }
 
+function loadLastSearch() {
+    // //search local storage for a past search to populate page with
+    // var pastState = localStorage.getItem("pastState");
+    // var pastCity = localStorage.getItem("pastCity");
+    // var pastZip = localStorage.getItem("pastZip");
+    // var hasSearched = localStorage.getItem("hasSearched");
+    // //first time loading the page, just initialize local storage variables and don't search
+    // if(pastState == null) {
+    //     pastState = "";
+    //     pastCity = "";
+    //     pastZip = "";
+    //     hasSearched = "false";
+    //     localStorage.setItem("pastState", pastState);
+    //     localStorage.setItem("pastCity", pastCity);
+    //     localStorage.setItem("pastZip", pastZip);
+    //     localStorage.setItem("hasSearched", hasSearched);
+    // }
+    // // we have had a past search so we will redo it  
+    // else {
+        
+    // }
+}
+
 //For when the user clicks on the button to search for charities
-subButEl.on("click", getResults);
+subButEl.on("click", function() {
+        //user inputs from page
+        var city = cityEl.val();
+        var state = stateEl.val();
+        var zip = zipEl.val();
+
+        // reset vals in input and remove current cards from page
+        cityEl.val("");
+        stateEl.val("State");
+        zipEl.val("");
+        charitySectEl.html("");
+        getResults(city, state, zip);
+});
 //For when the modal opens telling the user that there was an error searching for results
 closeNoResultsEl.on("click", function() {
     noResultsEl.removeClass("modal-open");
@@ -326,3 +351,4 @@ charitySectEl.on("click", "#prev-button", loadPastResults);
 charitySectEl.on("click", "#next-button", loadNextResults);
 
 fillStates();
+// loadLastSearch();

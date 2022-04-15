@@ -41,9 +41,33 @@ We have four main features on our site:
 ### **Breed Information**
 
 ### **Animal Facts**
-- signifcant new technologies used
-- features within the page
-- what the page is/does
+
+The animal facts page is made for the last bit of convincing you may need to commit to adopting a new pet. In this section learn the fun and interesting things that pets do for us each day. After going through this carousel of facts and reading the creators of PetHubs testimonials to why we love and appreciate our pets, you will want to have one of your own!
+
+PetHub Web App was developed with innovative technologies to make the layout and design appeal to a modern user. Animal facts page specifically was designed heavily with [daisyUI](https://daisyui.com/) and features from its parent [Tailwind CSS](https://tailwindcss.com/docs/installation). Animal Facts page has a carousel that displays facts of cats and dogs as you scroll through. The carousel was dynamically generated to present a different picture and fact as you scroll through the list. 
+If you were to click from the starting picture, it will either scroll to the next fact and image, or it will scroll to the last page depending on the button clicked.
+```
+if(i === 0) {
+            buttonLeft.attr("href", "#slide" + (animalFacts.length -1)); 
+            buttonRight.attr("href", "#slide1")
+```
+If you are at the end of the carousel and you click the right button, it will go back to the start, and if you click the left button, it will just go back one.
+```
+ } else if (i === animalFacts.length -1) {
+            buttonLeft.attr("href", "#slide" + (i - 1));
+            buttonRight.attr("href", "#slide0");
+```
+
+The other significant features of this page was implementation of the Box Alignment feature, using [daisyUI](https://daisyui.com/). DaisyUI made it incredibly easy to align cards or text throughout the web app. The simple syntax made it easy to remember the code without having to scroll through documentation multiple times.
+```
+<section class="flex flex-wrap justify-center mt-6">
+          <div class="card w-96 bg-base-100 shadow-xl justify-end mt-6">
+```
+The example above shows how the simple syntax for justifying an item to the center is: justify-center. The specifics for margin or height as well is: m-# or h-#. This simplified and shortened the code making it easier to go back and read.
+
+Altogether, these new technologies made it easier to style the page and make it unique, but simple to navigate.
+
+![animal facts layout](./assets/media/animal-facts-gif.gif)
 
 ## **Technologies Used**
 * [Tailwind CSS](https://tailwindcss.com/docs/installation)

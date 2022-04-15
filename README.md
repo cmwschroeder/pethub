@@ -64,6 +64,10 @@ If you don't want to search there will also be four suggested charities at the b
 
 ![Gif showing the animation of the page](./assets/media/animated-charity-page.gif)
 
+This page also has local storage functionality, if you want to save your last search so that on a page reload it searches that search and displays the result again then keep the toggle checked and it will happen. If you don't want that then just untick the toggle and your last search will not be redone on page load.
+
+![Gif showing page reload with redone search and no search](./assets/media/local-storagecharity.gif)
+
 ### **Breed Information**
 So you're ready to adopt a dog or you want to adopt just not sure which breed is right for you. Well you came to the right place. Here at PetHub we have many valuable resources but this specific page will help identify dog breeds and their characteristics simply follow this<a href='https://cmwschroeder.github.io/pethub/pages/dogBreeds.html' target='_blank'> link</a> after your walkthrough. 
 

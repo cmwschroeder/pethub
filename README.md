@@ -36,6 +36,18 @@ We have four main features on our site:
 
 ### **Pet Finder**
 
+The PetFinder feature is where our users will look for their future fur baby. To view this page you can click [here](https://cmwschroeder.github.io/pethub/pages/petFinder.html).
+
+![Mobile view of the gallery of pets for adoption](./assets/media/petFinderScroll.gif)
+
+Pictured above you can see the mobile view of our pet finder feature. As you scroll you will be presented with animals who are looking for homes. Upon your initial visit the pag. If you would like to find a pet in a certain location, you should use the search form at the top of the page.
+
+![User clicks cats from dropdown to see cats for adoption in San Francisco](./assets/media/petFinderSearch.gif)
+
+As pictured in the above animation, to choose which type of animal you would like to search for, you can choose options from a dropdown list. The option to add a location is also available, allowing users to enter their city and state or zip code to present results from within 100 miles of that location.
+
+There is also a return to top button so the user can be brought back to the top of the page and adjust their search results if they would like.
+
 ### **Charities**
 
 ### **Breed Information**
@@ -84,24 +96,4 @@ Altogether, these new technologies made it easier to style the page and make it 
 * [Christian Schroeder](https://github.com/cmwschroeder)
 
 ## **License**
-MIT License
-
-Copyright (c) [2022] [Joey Bennett, Kylie Shinn, Krystopher Quintero, Christian Schroeder]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+PetHub is available under the MIT license. For licensing details see [LICENSE](LICENSE.txt) document.

@@ -51,6 +51,11 @@ There is also a return to top button so the user can be brought back to the top 
 ### **Charities**
 
 ### **Breed Information**
+So you're ready to adopt a dog or you want to adopt just not sure which breed is right for you. Well you came to the right place. Here at PetHub we have many valuable resources but this specific page will help identify dog breeds and their characteristics simply follow this<a href='https://cmwschroeder.github.io/pethub/pages/dogBreeds.html' target='_blank'> link</a> after your walkthrough. 
+
+First lets direct ourselves to the breed information page which you can select on the navigation bar on the top right on any page you are on. Then select the drop-down menu which will populate over 100+ breeds to select from. Once you have decided which breed to find more information about select the breed and a card will populate with the characteristics of the selected breed. Here is a visual walk through of the process.
+
+![visual walk through of using breed info](assets/media/dogbreedtut.gif)
 
 ### **Animal Facts**
 

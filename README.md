@@ -50,6 +50,20 @@ There is also a return to top button so the user can be brought back to the top 
 
 ### **Charities**
 
+We have a charity search page for all of the animal lovers out there. Have a pet already but still want to put some money in helping other animals? Not interested in a pet right now but still want to help? Maybe you don't have enough to take care of a pet full time but enough to help out a little. Any reason you may have to donate to a charity is a good one. On this page you can put in a state, city, or zipcode to narrow down your charity searches. You will the be shown results from Charity Navigator. Don't want to search at a certain place? No problem, just don't fill in any of the search inputs and you'll get a list of charities not specified by location. You can visit our search page by going [here](https://cmwschroeder.github.io/pethub/pages/charity.html).
+
+Our search in action:
+
+![Search results on a page](./assets/media/search-charities.gif)
+
+The list will be populated with short snippets about each charity, showing the charities name, address, and Charity Navigator rating. There will also be a button with read more. When this button is clicked you will be shown another menu with the charities name, mission, and a link to go and visit their website. Here is what that would look like:
+
+![Read more charity button in action](./assets/media/view-charity-info.gif)
+
+If you don't want to search there will also be four suggested charities at the bottom of the page. These will be shown with their logo as the backgournd image, the charity name, and a link to their respective websites. This page won't be bland either. The elements on this page are animated through AniJS. Scrolling through the search results will show an animation of them coming in from the side, while the suggested charities on bottom will appear with a little bit of flare. You won't be bored looking at this website!
+
+![Gif showing the animation of the page](./assets/media/animated-charity-page.gif)
+
 ### **Breed Information**
 So you're ready to adopt a dog or you want to adopt just not sure which breed is right for you. Well you came to the right place. Here at PetHub we have many valuable resources but this specific page will help identify dog breeds and their characteristics simply follow this<a href='https://cmwschroeder.github.io/pethub/pages/dogBreeds.html' target='_blank'> link</a> after your walkthrough. 
 

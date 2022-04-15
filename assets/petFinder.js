@@ -14,11 +14,24 @@ var apiKey = "siwywcH8smVuYkQwaTxLaU7o5ukX7sk2DJNC8VmyzQEqEeABq8";
 var apiSecret = "kFtKSHvS38045Ixyzok8EtG9BdouqbfU3CMdC1iK";
 var apiAuthBearer;
 
+//set the previousSearch localstorage variable up here
+var previousSearch;
+
+//check if there is any localstorage
+if(localStorage.getItem("previousSearch") === null) {
+    //if not lets make one
+    localStorage.setItem("previousSearch", "");
+}
+
+//set previous search to the local storage previous search
+previousSearch = localStorage.getItem("previousSearch");
+
+if(previousSearch !== "") {
+    petLocationInput.val(previousSearch);
+}
+
 //we will store pets in this array
 var petsArray = [];
-
-//this will keep track of what page number we are on
-var currentPage = 1;
 
 // call the petfinder authentication function
 pullPetFinderAuth();
@@ -131,6 +144,10 @@ function pullPetFinderData() {
     //set the button to loading so the user doesn't click it again
     searchBtn.attr("class", "btn loading");
     searchBtn.text("loading");
+
+    //store user's previous search
+    previousSearch = petLocationInput.val();
+    localStorage.setItem("previousSearch", previousSearch);
 
     //set the generic/default url so we always have a url
     var petFinderUrl = "https://api.petfinder.com/v2/animals";

@@ -6,6 +6,9 @@ var zipEl = $("#zipcode-input");
 var subButEl = $("#submit-button");
 var eggButEl = $("#egg-button");
 
+// Refernce to toggle for local storage
+var loadPastEl = $("#load-past");
+
 // References for modals
 var noResultsEl = $('#404-modal');
 var closeNoResultsEl = $('#close-modal');
@@ -30,6 +33,11 @@ var states = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI',
              'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
              'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
+/*
+ * This function will make the api request url based on the inputs given and then do a fetch request, will then give the data to the load
+ * results function and after it returns it will check if the results are more than what we populated on the page. If it is more than we put
+ * on the page then we will create a next button at the bottom of the page to go to the next page of results.
+ */
 function getResults(city, state, zip) {
     //make the submit button into a loading symbol
     subButEl.addClass("loading btn-disabled");
@@ -293,20 +301,28 @@ function loadLastSearch() {
     var pastCity = localStorage.getItem("pastCity");
     var pastZip = localStorage.getItem("pastZip");
     var hasSearched = localStorage.getItem("hasSearched");
+    var loadPast = localStorage.getItem("loadPast");
     //first time loading the page, just initialize local storage variables and don't search
     if(pastState == null) {
         pastState = "";
         pastCity = "";
         pastZip = "";
         hasSearched = "false";
+        loadPast = "true";
         localStorage.setItem("pastState", pastState);
         localStorage.setItem("pastCity", pastCity);
         localStorage.setItem("pastZip", pastZip);
         localStorage.setItem("hasSearched", hasSearched);
+        localStorage.setItem("loadPast", loadPast);
     }
-    // we have had a past search so we will redo it  
-    else if(hasSearched != "false") {
+    // we have had a past search so we will redo it but only if the user has selected that we will
+    // load past results on page reload
+    else if(hasSearched != "false" && loadPast == "true") {
         getResults(pastCity, pastState, pastZip);
+    }
+    // if we aren't loading results because the user chose not to then set the toggle to unchecked
+    else if(loadPast == "false") {
+        loadPastEl.prop("checked", false);
     }
 }
 
@@ -338,6 +354,7 @@ subButEl.on("click", function() {
         //pass the values into the search function
         getResults(city, state, zip);
 });
+
 //For when the modal opens telling the user that there was an error searching for results
 closeNoResultsEl.on("click", function() {
     noResultsEl.removeClass("modal-open");
@@ -349,6 +366,7 @@ closeCharityModal.on("click", function() {
 //Clicking on any read more button will open up with more info on the charity and a link to the charities website
 charitySectEl.on("click", ".readMoreBtn", readMore);
 
+//invisible button that changes the theme of the page if you find it
 eggButEl.on("click", function() {
     var html = $('html');
     if(html.attr("data-theme") === "synthwave") {
@@ -363,6 +381,16 @@ eggButEl.on("click", function() {
 //Clicking on the buttons that exist after the charity if there are enough results, will move to the next page of charities
 charitySectEl.on("click", "#prev-button", loadPastResults);
 charitySectEl.on("click", "#next-button", loadNextResults);
+
+//changes the value stored in local storage that determines if we load the last search on page reload
+loadPastEl.on("click", function() {
+    var loadPast = localStorage.getItem("loadPast");
+    if(loadPast == "true") {
+        localStorage.setItem("loadPast", "false");
+    } else {
+        localStorage.setItem("loadPast", "true");
+    }
+});
 
 fillStates();
 loadLastSearch();

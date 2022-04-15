@@ -15,7 +15,6 @@ function populateList() {
             return response.json();
         })
         .then(function(data) {
-            console.log(data)
             for (var i = 0; i < data.length; i++) {
                 var optionEl = $('<option>')
                 optionEl.text(data[i].name)
@@ -63,7 +62,6 @@ function listSelect() {
     var imageEl = $('<img>')
     imageEl.attr('src', dogBreeds.image)
     breed.append(imageEl)
-    console.log("hello is it me youre looking for")
         // names
     var nameEl = $('<h1>')
     nameEl.text(dogBreeds.name)

@@ -70,7 +70,7 @@ function displayFacts() {
         var buttonLeft = $('<a class="btn btn-glass">');
         var buttonRight = $('<a class="btn btn-glass">');
         var petImage = $("<img class='h-96 rounded hidden sm:inline'>");
-        var factTitle = $("<h3 class= 'm-1 flex items-center mb-28'>");
+        var factTitle = $("<h3 class= 'm-1 flex items-center mb-28 mx-4'>");
         
         //needed to change button style
         factTitle.css("font-weight", "bold")

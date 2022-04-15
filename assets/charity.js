@@ -288,26 +288,26 @@ function loadNextResults() {
 }
 
 function loadLastSearch() {
-    // //search local storage for a past search to populate page with
-    // var pastState = localStorage.getItem("pastState");
-    // var pastCity = localStorage.getItem("pastCity");
-    // var pastZip = localStorage.getItem("pastZip");
-    // var hasSearched = localStorage.getItem("hasSearched");
-    // //first time loading the page, just initialize local storage variables and don't search
-    // if(pastState == null) {
-    //     pastState = "";
-    //     pastCity = "";
-    //     pastZip = "";
-    //     hasSearched = "false";
-    //     localStorage.setItem("pastState", pastState);
-    //     localStorage.setItem("pastCity", pastCity);
-    //     localStorage.setItem("pastZip", pastZip);
-    //     localStorage.setItem("hasSearched", hasSearched);
-    // }
-    // // we have had a past search so we will redo it  
-    // else {
-        
-    // }
+    //search local storage for a past search to populate page with
+    var pastState = localStorage.getItem("pastState");
+    var pastCity = localStorage.getItem("pastCity");
+    var pastZip = localStorage.getItem("pastZip");
+    var hasSearched = localStorage.getItem("hasSearched");
+    //first time loading the page, just initialize local storage variables and don't search
+    if(pastState == null) {
+        pastState = "";
+        pastCity = "";
+        pastZip = "";
+        hasSearched = "false";
+        localStorage.setItem("pastState", pastState);
+        localStorage.setItem("pastCity", pastCity);
+        localStorage.setItem("pastZip", pastZip);
+        localStorage.setItem("hasSearched", hasSearched);
+    }
+    // we have had a past search so we will redo it  
+    else if(hasSearched != "false") {
+        getResults(pastCity, pastState, pastZip);
+    }
 }
 
 //For when the user clicks on the button to search for charities
@@ -322,6 +322,20 @@ subButEl.on("click", function() {
         stateEl.val("State");
         zipEl.val("");
         charitySectEl.html("");
+
+        //we have now searched so mark that in local storage for page reloads
+        var hasSearched = "true";
+        localStorage.setItem("hasSearched", hasSearched);
+
+        //save the rest of the search items in local storage to search again on reload
+        if(state == null) {
+            state = "";
+        }
+        localStorage.setItem("pastState", state);
+        localStorage.setItem("pastCity", city);
+        localStorage.setItem("pastZip", zip);
+
+        //pass the values into the search function
         getResults(city, state, zip);
 });
 //For when the modal opens telling the user that there was an error searching for results
@@ -351,4 +365,4 @@ charitySectEl.on("click", "#prev-button", loadPastResults);
 charitySectEl.on("click", "#next-button", loadNextResults);
 
 fillStates();
-// loadLastSearch();
+loadLastSearch();
